@@ -10,4 +10,15 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-@plugin "daisyui";
+@plugin "daisyui" {
+
+  themes: light --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+
+  --color-primary: #00A9B7;   /* teal */
+  --color-secondary: #073B63; /* navy */
+}
