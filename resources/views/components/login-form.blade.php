@@ -76,11 +76,14 @@
                 {{-- Action buttons --}}
                 <div class="space-y-2 pt-3">
                     <button type="submit" class="btn btn-primary w-full text-white font-semibold">
-                        Sign In
+                        Log in
                     </button>
-
-                    <a href="#" class="btn btn-outline btn-secondary w-full font-semibold">
-                        Sign Up
+                <br>
+                <p class="text-sm text-secondary/70">
+                    Don't have an account yet?
+                </p>
+                    <a href="register" class="btn btn-outline btn-secondary w-full font-semibold">
+                        Register
                     </a>
                 </div>
             </form>
