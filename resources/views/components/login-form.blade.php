@@ -10,7 +10,7 @@
                     class="h-12 w-auto"
                     alt="UTama Logo">
 
-                <div class="w-[2px] h-10 bg-secondary opacity-40"></div>
+                <div class="w-0.5 h-10 bg-secondary opacity-40"></div>
 
                 {{-- Tremic Logo --}}
                 <img src="{{ asset('images/logo.webp') }}"
@@ -30,7 +30,7 @@
             </div>
 
             {{-- Login form --}}
-            <form method="POST" action="#" class="space-y-4">
+            <form id="loginForm" method="POST" action="#" class="space-y-4" novalidate>
                 @csrf
 
                 {{-- Email / NIDN field --}}
@@ -38,13 +38,18 @@
                     <label class="label">
                         <span class="label-text text-secondary">Email / NIDN</span>
                     </label>
+
                     <input
                         type="text"
                         name="login_id"
+                        id="login_id"
                         placeholder="email@university.ac.id / NIDN"
-                        class="input input-bordered w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary"
-                        required
+                        class="input input-bordered w-full"
                     >
+
+                    <p id="loginIdError" class="text-sm text-error hidden mt-1">
+                        Please enter a valid email address or numeric NIDN.
+                    </p>
                 </div>
 
                 {{-- Password field --}}
@@ -52,13 +57,18 @@
                     <label class="label">
                         <span class="label-text text-secondary">Password</span>
                     </label>
+
                     <input
                         type="password"
                         name="password"
+                        id="password"
                         placeholder="••••••••"
-                        class="input input-bordered w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-primary"
-                        required
+                        class="input input-bordered w-full"
                     >
+
+                    <p id="passwordError" class="text-sm text-error hidden mt-1">
+                        Password must be at least 8 characters long.
+                    </p>
                 </div>
 
                 {{-- Remember me + Forgot password --}}
