@@ -21,7 +21,7 @@
 
                 {{-- Name --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Full Name</span>
                     </label>
                     <input
@@ -38,7 +38,7 @@
 
                 {{-- Email --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Email</span>
                     </label>
                     <input
@@ -55,7 +55,7 @@
 
                 {{-- Password --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Password</span>
                     </label>
                     <input
@@ -72,7 +72,7 @@
 
                 {{-- NIDN --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">NIDN</span>
                     </label>
                     <input
@@ -89,7 +89,7 @@
 
                 {{-- Prodi --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Program Study (Prodi)</span>
                     </label>
                     <select name="prodi" id="reg_prodi" class="select select-bordered w-full">
@@ -109,7 +109,7 @@
 
                 {{-- Faculty --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Faculty</span>
                     </label>
                     <select name="faculty" id="reg_faculty" class="select select-bordered w-full">
@@ -127,7 +127,7 @@
 
                 {{-- Position --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Position</span>
                     </label>
                     <select name="position" id="reg_position" class="select select-bordered w-full">
@@ -147,7 +147,7 @@
 
                 {{-- Phone Number --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Phone Number</span>
                     </label>
                     <input

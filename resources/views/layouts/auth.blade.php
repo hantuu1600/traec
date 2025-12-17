@@ -2,12 +2,12 @@
 <html lang="en" data-theme="efilling">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $title ?? 'Auth Page' }}</title>
+    <title>Tremic | {{ $title ?? 'Auth Page' }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
     @vite(['resources/css/app.css'])
 </head>
-<body class="relative min-h-screen flex items-center justify-center p-4"
-      style="background-image: url('/images/teal.webp'); background-size: cover; background-position: center;">
+<body class="font-sans relative min-h-screen flex items-center justify-center p-4 bg-auth-gradient">
 
     {{-- Preloader should be the topmost overlay --}}
     @includeIf('components.preloader')

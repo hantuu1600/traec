@@ -35,7 +35,7 @@
 
                 {{-- Email / NIDN field --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Email / NIDN</span>
                     </label>
 
@@ -54,7 +54,7 @@
 
                 {{-- Password field --}}
                 <div class="form-control">
-                    <label class="label">
+                    <label class="label mb-1">
                         <span class="label-text text-secondary">Password</span>
                     </label>
 

@@ -3,7 +3,7 @@ window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (!preloader) return;
 
-  const WAIT = 3000;
+  const WAIT = 1350;
   const FADE_MS = 500;
 
   setTimeout(() => {
@@ -46,6 +46,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   };
 
+  // Live validation helper (input + blur)
+  const bindLiveValidation = (el, msgEl, validator) => {
+    if (!el || !msgEl) return;
+
+    const run = () => {
+      const ok = validator((el.value || '').trim());
+      if (!ok) showError(el, msgEl);
+      else hideError(el, msgEl);
+      return ok;
+    };
+
+    el.addEventListener('input', run);
+    el.addEventListener('blur', run);
+
+    // Optional: if you want the error to disappear immediately after page load,
+    // keep it hidden by default in HTML (recommended).
+    return run;
+  };
+
   // ---------- LOGIN VALIDATION ----------
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
@@ -55,10 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginIdError = document.getElementById('loginIdError');
     const passwordError = document.getElementById('passwordError');
 
+    // Live rules
+    const validateLoginId = bindLiveValidation(loginId, loginIdError, (v) => {
+      if (!v) return false;
+      return isEmail(v) || isNumeric(v);
+    });
+
+    const validatePassword = bindLiveValidation(password, passwordError, (v) => {
+      return v.length >= 8;
+    });
+
     loginForm.addEventListener('submit', (event) => {
       let ok = true;
 
-      // reset
+      // reset (keep structure)
       hideError(loginId, loginIdError);
       hideError(password, passwordError);
 
@@ -76,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showError(password, passwordError);
         ok = false;
       }
+
+      // Re-check using live validators (if available)
+      if (typeof validateLoginId === 'function') ok = validateLoginId() && ok;
+      if (typeof validatePassword === 'function') ok = validatePassword() && ok;
 
       if (!ok) event.preventDefault();
     });
@@ -101,6 +134,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const errFaculty = document.getElementById('regFacultyError');
     const errPosition = document.getElementById('regPositionError');
     const errPhone = document.getElementById('regPhoneError');
+
+    // Live rules
+    const validateName = bindLiveValidation(name, errName, (v) => v.length >= 3);
+    const validateEmail = bindLiveValidation(email, errEmail, (v) => isEmail(v));
+    const validatePass = bindLiveValidation(pass, errPass, (v) => v.length >= 8);
+    const validateNidn = bindLiveValidation(nidn, errNidn, (v) => isNumeric(v) && v.length >= 6);
+
+    const validateProdi = bindLiveValidation(prodi, errProdi, (v) => v !== '');
+    const validateFaculty = bindLiveValidation(faculty, errFaculty, (v) => v !== '');
+    const validatePosition = bindLiveValidation(position, errPosition, (v) => v !== '');
+
+    const validatePhone = bindLiveValidation(phone, errPhone, (v) => isValidPhone(v));
 
     registerForm.addEventListener('submit', (event) => {
       let ok = true;
@@ -169,6 +214,16 @@ document.addEventListener('DOMContentLoaded', () => {
         showError(phone, errPhone);
         ok = false;
       }
+
+      // Re-check using live validators (if available)
+      if (typeof validateName === 'function') ok = validateName() && ok;
+      if (typeof validateEmail === 'function') ok = validateEmail() && ok;
+      if (typeof validatePass === 'function') ok = validatePass() && ok;
+      if (typeof validateNidn === 'function') ok = validateNidn() && ok;
+      if (typeof validateProdi === 'function') ok = validateProdi() && ok;
+      if (typeof validateFaculty === 'function') ok = validateFaculty() && ok;
+      if (typeof validatePosition === 'function') ok = validatePosition() && ok;
+      if (typeof validatePhone === 'function') ok = validatePhone() && ok;
 
       if (!ok) event.preventDefault();
     });
