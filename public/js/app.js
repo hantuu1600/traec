@@ -229,3 +229,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+//SIDEBAR
+const sidebar = document.getElementById('sidebar');
+const toggle = document.getElementById('sidebarToggle');
+
+toggle.addEventListener('click', () => {
+    const collapsed = sidebar.classList.toggle('w-20');
+    sidebar.classList.toggle('w-64');
+
+    // Hide text when collapsed
+    document.querySelectorAll('.menu-text').forEach(el => {
+        el.classList.toggle('hidden');
+    });
+
+    // Rotate icon
+    toggle.querySelector('span').classList.toggle('rotate-180');
+});

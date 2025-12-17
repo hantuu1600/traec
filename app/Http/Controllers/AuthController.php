@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     public function loginView() {
-        return view('auth.login', ['title' => 'Login']);
+        return view('pages.login', ['title' => 'Login']);
     }
 
     public function registerView() {
-        return view('auth.register', ['title' => 'Register']);
+        return view('pages.register', ['title' => 'Register']);
     }
 }
