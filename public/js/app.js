@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //SIDEBAR
 const sidebar = document.getElementById('sidebar');
 const toggle = document.getElementById('sidebarToggle');
+const arrow = document.getElementById('sidebarArrow');
 
 toggle.addEventListener('click', () => {
     const collapsed = sidebar.classList.toggle('w-20');
@@ -244,5 +245,5 @@ toggle.addEventListener('click', () => {
     });
 
     // Rotate icon
-    toggle.querySelector('span').classList.toggle('rotate-180');
+    arrow.classList.toggle('rotate-180');
 });
