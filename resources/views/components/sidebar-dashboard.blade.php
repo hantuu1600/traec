@@ -28,7 +28,6 @@
         </a>
     </nav>
 
-
     {{-- Sidebar Handle (Penarik) --}}
     <<button id="sidebarToggle"
         class="absolute top-1/2 -right-3 w-6 h-12

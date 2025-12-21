@@ -168,7 +168,7 @@
                 </button>
 
                 {{-- Back to Login --}}
-                <a href="/auth/login" class="btn btn-outline btn-secondary w-full font-semibold">
+                <a href="/pages/login" class="btn btn-outline btn-secondary w-full font-semibold">
                     Back to Login
                 </a>
             </form>
