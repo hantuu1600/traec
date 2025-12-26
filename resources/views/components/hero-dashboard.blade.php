@@ -15,7 +15,6 @@
             &quot;{{ $subtitle }}&quot;
         </p>
 
-        {{-- SEARCH DI DALAM HERO (tidak offset keluar) --}}
         <div class="mt-12">
             {{ $slot }}
         </div>
