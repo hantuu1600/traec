@@ -24,6 +24,6 @@
   --color-secondary: #073B63; /* navy */
 }
 
-.bg-auth-gradient {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+.bg-auth-gradient{
+  background: linear-gradient(45deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }

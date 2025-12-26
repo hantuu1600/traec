@@ -3,11 +3,11 @@
                flex items-center px-6">
 
     <div class="flex items-center gap-3">
-        <img src="{{ asset('images/Logo.webp') }}" class="h-8 w-auto" alt="Tremic Logo">
+        <img src="{{ asset('images/Logo.webp') }}" class="h-12 w-auto" alt="Tremic Logo">
 
-        <span class="font-bold text-lg text-secondary">
+        <span class="font-bold text-xl text-secondary">
             Tremic
-            <span class="font-normal text-sm">– Tracker Academic</span>
+            <span class="font-normal text-lg">– Tracker Academic</span>
         </span>
     </div>
 
