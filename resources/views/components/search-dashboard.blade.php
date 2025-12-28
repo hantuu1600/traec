@@ -7,7 +7,7 @@
     'queryName' => 'q',
 ])
 
-<div class="mt-8">
+<div class="my-6">
     <form action="{{ $action }}" method="{{ $method }}">
         <div class="mx-auto w-full max-w-2xl rounded-full border border-primary bg-base-100 px-3 py-2 shadow-md">
             <div class="flex items-center gap-2">
