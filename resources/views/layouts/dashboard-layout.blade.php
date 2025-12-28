@@ -8,36 +8,25 @@
     @vite(['resources/css/app.css'])
 </head>
 
-<body class="font-sans bg-base-300">
+<body class="font-sans bg-base-100">
     {{-- HEADER --}}
     <x-header-dashboard />
 
     <div class="flex pt-16 min-h-screen overflow-hidden">
         {{-- SIDEBAR --}}
-        <x-sidebar-dashboard />
+        <x-admin-sidebar />
 
         {{-- MAIN CONTENT --}}
         <main class="flex-1 overflow-y-auto">
-
-            {{-- HERO + SEARCH --}}
-            <x-hero-dashboard
-                title="Tracker Academic"
-                subtitle="Track your daily routines, stay consistent, and turn goals into habits all in one beautiful app."
-            >
-                <x-search-dashboard
-                    :filters="['All', 'Courses', 'Assignments', 'Lecturers', 'Schedules']"
-                    placeholder="Search a goal"
-                    action="#"
-                />
-            </x-hero-dashboard>
-            
-            {{-- PAGE CONTENT --}}
-            <section class="mx-auto max-w-5xl px-6 pt-10 pb-10">
+            <section class="mx-auto">
                 @yield('content')
             </section>
 
         </main>
     </div>
+
+    {{-- FOOTER --}}
+    <x-footer />
 
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

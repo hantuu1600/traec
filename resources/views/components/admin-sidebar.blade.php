@@ -11,7 +11,7 @@
     <nav class="flex-1 p-3 space-y-2 mt-5">
 
         {{-- HOME (ACTIVE) --}}
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ route('dashboard-admin') }}"
            class="{{ $linkBase }} {{ $active }}">
             <img src="{{ asset('images/logo.webp') }}"
                  class="w-8 h-8"
@@ -22,7 +22,7 @@
         </a>
 
         {{-- Documents --}}
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ route('dashboard-admin') }}"
            class="{{ $linkBase }} {{ $inactive }}">
             <img src="{{ asset('images/logo.webp') }}"
                  class="w-8 h-8 opacity-70"
@@ -33,7 +33,7 @@
         </a>
 
         {{-- Setting --}}
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ route('dashboard-admin') }}"
            class="{{ $linkBase }} {{ $inactive }}">
             <img src="{{ asset('images/logo.webp') }}"
                  class="w-8 h-8 opacity-70"
