@@ -2,13 +2,14 @@
                bg-base-100 border-b border-base-300
                flex items-center justify-between px-6">
 
-    {{-- LOGO + TITLE --}}
-    <div class="flex items-center gap-3">
-        <img src="{{ asset('images/Logo.webp') }}" class="h-10 w-auto" alt="Tremic Logo">
+    {{-- LOGO --}}
 
-        <span class="font-bold text-xl text-secondary">
+    <div class="hidden sm:flex flex-col leading-tight ">
+        <span class="text-2xl font-extrabold text-secondary text-center">
             Tremic
-            <span class="font-normal text-lg">– Tracker Academic</span>
+        </span>
+        <span class="text-sm text-base-content/60">
+            Tracker Academic
         </span>
     </div>
 
