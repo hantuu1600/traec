@@ -8,7 +8,7 @@
         $active   = "bg-primary text-white shadow-sm";
         $inactive = "text-base-content/70 hover:bg-base-200 hover:text-base-content";
 
-        // Icon wrapper
+        // Icon wrapper: bikin semua ikon sejajar dan ukurannya konsisten
         $iconBox  = "w-10 h-10 grid place-items-center rounded-full";
         $iconSvg  = "w-7 h-7 block";
 
@@ -19,8 +19,8 @@
     <nav class="flex-1 p-3 space-y-2 mt-5">
 
         {{-- HOME --}}
-        <a href="{{ route('admin.dashboard') }}"
-           class="{{ $linkBase }} {{ $isActive('admin.dashboard') ? $active : $inactive }}">
+        <a href="{{ route('lecturer.dashboard') }}"
+           class="{{ $linkBase }} {{ $isActive('lecturer.dashboard') ? $active : $inactive }}">
 
             <span class="{{ $iconBox }}">
                 <svg class="{{ $iconSvg }}"
@@ -32,36 +32,14 @@
                 </svg>
             </span>
 
-            <span class="menu-text text-md {{ $isActive('admin.dashboard') ? 'font-semibold' : 'font-medium' }}">
+            <span class="menu-text text-md {{ $isActive('lecturer.dashboard') ? 'font-semibold' : 'font-medium' }}">
                 Home
             </span>
         </a>
 
-        {{-- LECTURERS --}}
-        <a href="{{ route('admin.lecturers') }}"
-           class="{{ $linkBase }} {{ $isActive('admin.lecturers') ? $active : $inactive }}">
-
-            <span class="{{ $iconBox }}">
-            <svg class="{{ $iconSvg }}"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2 1 7l11 5 9-4.09V17h2V7L12 2z"/>
-                <path d="M5 10v4c0 2.21 3.13 4 7 4s7-1.79 7-4v-4l-7 3-7-3z"/>
-                <circle cx="12" cy="13" r="2.5"/>
-                <path d="M6 22c0-3.31 2.69-6 6-6s6 2.69 6 6H6z"/>
-            </svg>
-            </span>
-
-
-            <span class="menu-text text-md {{ $isActive('admin.lecturers') ? 'font-semibold' : 'font-medium' }}">
-                Lecturers
-            </span>
-        </a>
-
         {{-- DOCUMENTS --}}
-        <a href="{{ route('admin.document-request') }}"
-           class="{{ $linkBase }} {{ $isActive('admin.document-request') ? $active : $inactive }}">
+        <a href="{{ route('lecturer.dashboard') }}"
+           class="{{ $linkBase }} {{ $isActive('documents.*') ? $active : $inactive }}">
 
             <span class="{{ $iconBox }}">
                 <svg class="{{ $iconSvg }}"
@@ -73,14 +51,14 @@
                 </svg>
             </span>
 
-            <span class="menu-text text-md {{ $isActive('admin.document-request') ? 'font-semibold' : 'font-medium' }}">
+            <span class="menu-text text-md {{ $isActive('documents.*') ? 'font-semibold' : 'font-medium' }}">
                 Documents
             </span>
         </a>
 
         {{-- SETTINGS --}}
-        <a href="{{ route('admin.dashboard') }}"
-           class="{{ $linkBase }} {{ $isActive('settings.*') ? $active : $inactive }}">
+        <a href="{{ route('lecturer.profile') }}"
+           class="{{ $linkBase }} {{ $isActive('lecturer.profile') ? $active : $inactive }}">
 
             <span class="{{ $iconBox }}">
                 <svg class="{{ $iconSvg }}"
@@ -92,7 +70,7 @@
                 </svg>
             </span>
 
-            <span class="menu-text text-md {{ $isActive('settings.*') ? 'font-semibold' : 'font-medium' }}">
+            <span class="menu-text text-md {{ $isActive('lecturer.profile') ? 'font-semibold' : 'font-medium' }}">
                 Setting
             </span>
         </a>

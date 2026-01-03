@@ -1,4 +1,4 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.dashboard-lecturer-layout')
 
 @section('content')
 <div class="w-full max-w-6xl mx-auto space-y-6">

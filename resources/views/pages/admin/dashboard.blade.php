@@ -41,7 +41,7 @@
     ];
 @endphp
 
-@extends('layouts.dashboard-layout')
+@extends('layouts.dashboard-admin-layout')
 
 @section('content')
     {{-- HERO + SEARCH --}}
@@ -63,6 +63,6 @@
     
     
     {{-- ACTIVITY TABLE --}}
-    <x-activity-table :rows="$rows"/>
+    <x-activity-table-admin :rows="$rows"/>
 
 @endsection

@@ -3,11 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', fn() => redirect('/pages/login'));
 Route::get('/pages/login', [AuthController::class, 'loginView'])->name('login');
 Route::get('/pages/register', [AuthController::class, 'registerView'])->name('register');
-Route::get('/pages/dashboard-admin', [DashboardController::class, 'dashboardAdminView'])->name('dashboard-admin');
 
-Route::get('/lecturer/profile', [LecturerController::class, 'profile'])->name('lecturer.profile');
+Route::get('/pages/admin/dashboard', [DashboardController::class, 'dashboardAdminView'])->name('admin.dashboard');
+Route::get('/pages/lecturer/dashboard', [DashboardController::class, 'dashboardLecturerView'])->name('lecturer.dashboard');
+
+Route::get('/lecturer/profile', [ProfileController::class, 'profile'])->name('lecturer.profile');
+
+Route::get('/pages/admin/lecturers', [App\Http\Controllers\LecturersController::class, 'LecturersView'])->name('admin.lecturers');
+
+Route::get('/pages/admin/document-request', [App\Http\Controllers\DocumentController::class, 'DocumentView'])->name('admin.document-request');
