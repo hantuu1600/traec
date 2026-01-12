@@ -29,8 +29,15 @@
                 </p>
             </div>
 
+            {{-- Success message after register --}}
+            @if(session('success'))
+                <div class="alert alert-success shadow-sm mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             {{-- Login form --}}
-            <form id="loginForm" method="POST" action="#" class="space-y-4" novalidate>
+            <form id="loginForm" method="POST" action="{{ route('login.process') }}" class="space-y-4" novalidate>
                 @csrf
 
                 {{-- Email / NIDN field --}}

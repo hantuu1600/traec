@@ -16,7 +16,7 @@
             </div>
 
             {{-- Register Form --}}
-            <form id="registerForm" method="POST" action="#" class="space-y-5" novalidate>
+            <form id="registerForm" method="POST" action="{{ route('register.process') }}" class="space-y-5" novalidate>
                 @csrf
 
                 {{-- Name --}}

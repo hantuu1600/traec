@@ -17,3 +17,6 @@ Route::get('/lecturer/profile', [ProfileController::class, 'profile'])->name('le
 Route::get('/pages/admin/lecturers', [App\Http\Controllers\LecturersController::class, 'LecturersView'])->name('admin.lecturers');
 
 Route::get('/pages/admin/document-request', [App\Http\Controllers\DocumentController::class, 'DocumentView'])->name('admin.document-request');
+
+Route::post('/login', [AuthController::class, 'loginProcess'])->name('login.process');
+Route::post('/register', [AuthController::class, 'registerProcess'])->name('register.process');
