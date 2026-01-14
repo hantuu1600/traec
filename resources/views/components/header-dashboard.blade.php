@@ -41,7 +41,7 @@
                    rounded-box w-52 text-sm">
 
             <li>
-                <a href="#" class="flex items-center gap-2">
+                <a href="/lecturer/profile" class="flex items-center gap-2">
                     Account Settings
                 </a>
             </li>

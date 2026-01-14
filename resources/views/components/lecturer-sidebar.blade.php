@@ -38,8 +38,8 @@
         </a>
 
         {{-- DOCUMENTS --}}
-        <a href="{{ route('lecturer.dashboard') }}"
-           class="{{ $linkBase }} {{ $isActive('documents.*') ? $active : $inactive }}">
+        <a href="{{ route('lecturer.teaching.index') }}"
+           class="{{ $linkBase }} {{ $isActive('lecturer.teaching.index') ? $active : $inactive }}">
 
             <span class="{{ $iconBox }}">
                 <svg class="{{ $iconSvg }}"

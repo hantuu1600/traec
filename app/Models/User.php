@@ -16,7 +16,7 @@ class User extends Authenticatable
         'nidn',
         'prodi',
         'faculty',
-        'position',
+        'position', 
         'phonenumber',
         'role',
     ];
