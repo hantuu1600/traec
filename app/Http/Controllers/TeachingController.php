@@ -4,54 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TeachingController extends Controller
 {
     public function index()
     {
-        $teachings = [
-            [
-                'id' => 1,
-                'course_code' => 'IF204',
-                'course_name' => 'Software Engineering',
-                'class' => 'A',
-                'day' => 'Monday',
-                'time' => '08:00 - 09:40',
-                'room' => 'Lab 301',
-            ],
-            [
-                'id' => 2,
-                'course_code' => 'IF305',
-                'course_name' => 'Database Systems',
-                'class' => 'B',
-                'day' => 'Wednesday',
-                'time' => '10:00 - 11:40',
-                'room' => 'Room 204',
-            ],
-        ];
+        $teachings = DB::table('teaching_activities')
+            ->select(
+                'id',
+                'course_name',
+                'study_program',
+                'semester',
+                'credits',
+                'meetings_total',
+                'start_date',
+                'end_date',
+                'year',
+                'status'
+            )
+            ->whereNull('deleted_at')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('pages.lecturer.teaching', [
             'teachings' => $teachings,
         ]);
     }
 
-    public function edit(int $id)
-    {
+public function edit(Request $request, int $id)
+{
+    // AMBIL DATA
+    $teaching = DB::table('teaching_activities')
+        ->where('id', $id)
+        ->whereNull('deleted_at')
+        ->first();
 
-        $teaching = [
-            'id' => $id,
-            'course_code' => 'IF204',
-            'course_name' => 'Software Engineering',
-            'class' => 'A',
-            'day' => 'Tuesday',
-            'time' => '08:00 - 09:40',
-            'room' => 'Lab 301',
-        ];
-
-        return view('pages.lecturer.teaching-edit', [
-            'teaching' => $teaching,
-        ]);
+    if (! $teaching) {
+        abort(404);
     }
+
+    // JIKA PUT → UPDATE DATA
+    if ($request->isMethod('put')) {
+
+        $validated = $request->validate([
+            'study_program'  => 'required|string|max:150',
+            'semester'       => 'required|string|max:50',
+            'credits'        => 'required|integer|min:1',
+            'meetings_total' => 'required|integer|min:1',
+            'start_date'     => 'nullable|date',
+            'end_date'       => 'nullable|date|after_or_equal:start_date',
+            'year'           => 'required|integer|min:1900|max:2100',
+        ]);
+
+        DB::table('teaching_activities')
+            ->where('id', $id)
+            ->update([
+                'study_program'  => $validated['study_program'],
+                'semester'       => $validated['semester'],
+                'credits'        => $validated['credits'],
+                'meetings_total' => $validated['meetings_total'],
+                'start_date'     => $validated['start_date'],
+                'end_date'       => $validated['end_date'],
+                'year'           => $validated['year'],
+                'updated_at'     => now(),
+            ]);
+
+        return redirect()
+            ->route('lecturer.teaching.index')
+            ->with('success', 'Teaching schedule updated successfully.');
+    }
+
+    // JIKA GET → TAMPILKAN FORM
+    return view('pages.lecturer.teaching-edit', compact('teaching'));
+}
+
 
     public function store(Request $request)
     {

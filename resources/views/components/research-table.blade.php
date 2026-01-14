@@ -6,14 +6,14 @@
                 <thead>
                     <tr class="text-secondary text-center">
                         <th>No</th>
-                        <th>Course Name</th>
-                        <th>Study Program</th>
-                        <th>Semester</th>
-                        <th>Credits</th>
-                        <th>Meeting Total</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Rank</th>
+                        <th>Role</th>
+                        <th>Publisher</th>
                         <th>Year</th>
+                        <th>DOI</th>
+                        <th>Link</th>
                         <th>Status</th>
                         <th>Edit</th>
                     </tr>

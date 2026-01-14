@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeachingController;
+use App\Http\Controllers\ResearchController;
 
 Route::get('/', fn() => redirect('/pages/login'));
 Route::get('/pages/login', [AuthController::class, 'loginView'])->name('login');
@@ -32,11 +33,36 @@ Route::prefix('lecturer')
                     ->name('index');
 
                 // Teaching edit page
-                Route::get('{id}/edit', [TeachingController::class, 'edit'])
+                Route::match(['get', 'put'], '{id}/edit', [TeachingController::class, 'edit'])
                     ->name('edit');
+
+            });
+
+        Route::prefix('research')
+            ->name('research.')
+            ->group(function () {
+
+                // Research list
+                Route::get('/', [ResearchController::class, 'index'])
+                    ->name('index');
+
+                // Research edit page
+                Route::match(['get', 'put'], '{id}/edit', [ResearchController::class, 'edit'])
+                    ->name('edit');
+                
+                 Route::get('create', [ResearchController::class, 'create'])
+                    ->name('create');
+
+                // Store Research
+                Route::post('/', [ResearchController::class, 'store'])
+                    ->name('store');
+                    
+                // Research update
+                Route::match(['get', 'put'], '{id}/edit', [ResearchController::class, 'edit'])
+                    ->name('edit');
+
             });
     });
-
 
 
 Route::get('/pages/admin/lecturers', [App\Http\Controllers\LecturersController::class, 'LecturersView'])->name('admin.lecturers');
