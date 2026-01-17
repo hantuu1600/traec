@@ -102,6 +102,24 @@
             </span>
         </a>
 
+        <a href="{{ route('lecturer.verified-documents.index') }}"
+            class="{{ $linkBase }} {{ $isActive('lecturer.verified-documents.*') ? $active : $inactive }}"
+            aria-current="{{ $isActive('lecturer.verified-documents.*') ? 'page' : 'false' }}">
+            <span
+                class="{{ $iconBox }} {{ $isActive('lecturer.verified-documents.*') ? 'bg-primary/20' : 'bg-base-200/60 group-hover:bg-base-200' }}">
+                <svg class="{{ $iconSvg }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </span>
+
+            <span
+                class="menu-text text-sm {{ $isActive('lecturer.verified-documents.*') ? 'font-semibold' : 'font-medium' }}">
+                Verified Documents
+            </span>
+        </a>
+
         <a href="{{ route('lecturer.profile') }}"
             class="{{ $linkBase }} {{ $isActive('lecturer.profile') ? $active : $inactive }}"
             aria-current="{{ $isActive('lecturer.profile') ? 'page' : 'false' }}">

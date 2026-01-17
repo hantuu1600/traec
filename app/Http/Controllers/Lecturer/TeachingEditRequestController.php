@@ -41,16 +41,15 @@ class TeachingEditRequestController extends Controller
         //log request
         DB::table('activity_logs')->insert([
             'user_id' => Auth::id(),
-            'action' => 'REQUEST_EDIT',
-            'description' => "Request Edit Teaching Activity #{$id}: {$teaching->course_name}. Reason: {$request->reason}",
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
+            'action' => 'REQUEST_EDIT_TEACHING',
+            'entity_type' => 'Teaching',
+            'entity_id' => $id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         return redirect()
-            ->route('lecturer.teaching.show', $id)
+            ->route('lecturer.teaching.index')
             ->with('success', 'Permintaan edit telah dikirim ke admin. Mohon tunggu persetujuan.');
     }
 }

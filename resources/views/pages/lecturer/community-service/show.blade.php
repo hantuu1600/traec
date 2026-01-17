@@ -70,16 +70,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($members as $member)
+                                    @forelse($members as $member)
                                     <tr>
-                                        <td class="font-medium">{{ $member->name_display }}</td>
+                                        <td class="font-medium">{{ $member->name }}</td>
                                         <td>{{ $member->role }}</td>
-                                        <td><span class="badge badge-sm badge-ghost">{{ $member->type_display }}</span></td>
+                                        <td><span class="badge badge-sm badge-ghost">Member</span></td>
                                     </tr>
-                                    @endforeach
-                                    @if($members->isEmpty())
+                                    @empty
                                         <tr><td colspan="3" class="text-center text-base-content/50">Tidak ada anggota tim.</td></tr>
-                                    @endif
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

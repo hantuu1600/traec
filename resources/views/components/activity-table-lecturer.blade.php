@@ -88,7 +88,16 @@
 
                 <td class="text-right">
                 <div class="flex justify-end gap-2">
-                    <a href="#" class="btn btn-md btn-ghost">View</a>
+                    @php
+                        $viewRoute = match($category) {
+                            'Teaching' => route('lecturer.teaching.show', $row['id'] ?? 0),
+                            'Research' => route('lecturer.research.show', $row['id'] ?? 0),
+                            'Community Service' => route('lecturer.community-service.show', $row['id'] ?? 0),
+                            'Support' => route('lecturer.support.show', $row['id'] ?? 0),
+                            default => '#'
+                        };
+                    @endphp
+                    <a href="{{ $viewRoute }}" class="btn btn-md btn-ghost">View</a>
                 </div>
                 </td>
             </tr>

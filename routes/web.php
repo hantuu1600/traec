@@ -101,6 +101,9 @@ Route::middleware(['auth', 'role:dosen'])->prefix('lecturer')->name('lecturer.')
         Route::post('/{id}/submit', [\App\Http\Controllers\Lecturer\SupportController::class, 'submit'])->name('submit');
     });
 
+    // Verified Documents
+    Route::get('/verified-documents', [\App\Http\Controllers\Lecturer\VerifiedDocumentsController::class, 'index'])->name('verified-documents.index');
+
     Route::prefix('period')->name('period.')->group(function () {
         Route::get('/status', [PeriodController::class, 'status'])->name('status');
     });

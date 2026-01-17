@@ -29,8 +29,11 @@ class PeriodController extends Controller
             'period' => (object) [
                 'id' => null,
                 'name' => '',
+                'type' => 'SEMESTER',
+                'academic_year' => '',
                 'start_date' => '',
                 'end_date' => '',
+                'status' => 'OPEN',
                 'is_active' => false
             ]
         ]);
@@ -39,7 +42,9 @@ class PeriodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
+            'type' => 'required|in:SEMESTER,YEARLY',
+            'academic_year' => 'required|string|max:20',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
@@ -54,8 +59,11 @@ class PeriodController extends Controller
 
             DB::table(self::TABLE)->insert([
                 'name' => $request->name,
+                'type' => $request->type,
+                'academic_year' => $request->academic_year,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
+                'status' => 'OPEN',
                 'is_active' => $isActive,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -63,9 +71,14 @@ class PeriodController extends Controller
 
             DB::commit();
             return redirect()->route('admin.periods.index')->with('success', 'Periode berhasil ditambahkan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Period creation failed', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Gagal menambahkan periode. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal menambahkan periode: ' . $e->getMessage());
+            \Log::error('Unexpected error in period creation', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 
@@ -84,7 +97,9 @@ class PeriodController extends Controller
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
+            'type' => 'required|in:SEMESTER,YEARLY',
+            'academic_year' => 'required|string|max:20',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
@@ -93,6 +108,8 @@ class PeriodController extends Controller
         try {
             DB::table(self::TABLE)->where('id', $id)->update([
                 'name' => $request->name,
+                'type' => $request->type,
+                'academic_year' => $request->academic_year,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'updated_at' => now(),
@@ -100,9 +117,14 @@ class PeriodController extends Controller
 
             DB::commit();
             return redirect()->route('admin.periods.index')->with('success', 'Periode berhasil diperbarui.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Period update failed', ['period_id' => $id, 'error' => $e->getMessage()]);
+            return back()->with('error', 'Gagal memperbarui periode. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal memperbarui periode: ' . $e->getMessage());
+            \Log::error('Unexpected error in period update', ['period_id' => $id, 'error' => $e->getMessage()]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 

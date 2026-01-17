@@ -35,20 +35,28 @@ class AdminManagementController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => 'admin',
-            'nidn' => '-',
-            'nip' => '-',
-            'prodi' => '-',
-            'faculty' => '-',
-            'position' => 'Admin System',
-            'phonenumber' => '-'
-        ]);
+        try {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'admin',
+                'nidn' => null,  // Admin tidak perlu NIDN
+                'nip' => null,
+                'prodi' => null,
+                'faculty' => null,
+                'position' => 'Admin System',
+                'phonenumber' => null
+            ]);
 
-        return redirect()->route('superadmin.admins.index')->with('success', 'Admin baru berhasil ditambahkan.');
+            return redirect()->route('superadmin.admins.index')->with('success', 'Admin baru berhasil ditambahkan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error('Admin creation failed', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Gagal menambahkan admin. Email mungkin sudah terdaftar.')->withInput();
+        } catch (\Exception $e) {
+            \Log::error('Unexpected error in admin creation', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
+        }
     }
 
     public function edit($id)

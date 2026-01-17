@@ -41,16 +41,13 @@ class ResearchEditRequestController extends Controller
         // log request
         DB::table('activity_logs')->insert([
             'user_id' => Auth::id(),
-            'action' => 'REQUEST_EDIT',
-            'description' => "Request Edit Research Activity #{$id}: {$research->title}. Reason: {$request->reason}",
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
+            'action' => 'REQUEST_EDIT_RESEARCH',
+            'entity_type' => 'Research',
+            'entity_id' => $id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        return redirect()
-            ->route('lecturer.research.show', $id)
-            ->with('success', 'Permintaan edit telah dikirim ke admin. Mohon tunggu persetujuan.');
+        return redirect()->route('lecturer.research.index')->with('success', 'Permintaan edit telah dikirim ke admin. Mohon tunggu persetujuan.');
     }
 }

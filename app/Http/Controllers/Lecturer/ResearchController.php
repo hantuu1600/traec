@@ -179,23 +179,88 @@ class ResearchController extends Controller
             // add other fields later
         ]);
 
-        DB::table('research_activities')->where('id', $id)->update([
-            ...$validated,
-            'updated_at' => now(),
-        ]);
+        DB::beginTransaction();
+        try {
+            DB::table('research_activities')->where('id', $id)->update([
+                ...$validated,
+                'updated_at' => now(),
+            ]);
 
-        return redirect()->route('lecturer.research.show', $id)->with('success', 'Data penelitian berhasil diperbarui.');
+            // Update members - delete old and insert new
+            if ($request->has('members')) {
+                // Delete existing members
+                DB::table('research_activity_members')
+                    ->where('research_activity_id', $id)
+                    ->delete();
+
+                // Insert new members
+                $addedMembers = [];
+                foreach ($request->members as $member) {
+                    $userId = !empty($member['user_id']) ? $member['user_id'] : null;
+                    $name = !empty($member['name']) ? $member['name'] : null;
+
+                    if ($userId || $name) {
+                        // Skip duplicate internal members
+                        if ($userId && in_array($userId, $addedMembers)) {
+                            continue;
+                        }
+
+                        DB::table('research_activity_members')->insert([
+                            'research_activity_id' => $id,
+                            'user_id' => $userId,
+                            'name' => $name,
+                            'role' => $member['role'] ?? 'Member',
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+
+                        if ($userId) {
+                            $addedMembers[] = $userId;
+                        }
+                    }
+                }
+            }
+
+            DB::commit();
+            return redirect()->route('lecturer.research.show', $id)->with('success', 'Data penelitian berhasil diperbarui.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Research update failed', [
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'research_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Gagal menyimpan perubahan. Silakan periksa kembali inputan Anda.')->withInput();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Unexpected error in research update', [
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'research_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
+        }
     }
 
     public function show(int $id)
     {
         $research = $this->findOrFail($id);
 
+        // Get members - use COALESCE to get name from users table OR name column
         $members = DB::table('research_activity_members')
-            ->join('users', 'users.id', '=', 'research_activity_members.user_id')
-            ->select('users.name', 'research_activity_members.role')
+            ->leftJoin('users', 'users.id', '=', 'research_activity_members.user_id')
+            ->select(
+                DB::raw('COALESCE(users.name, research_activity_members.name) as name'),
+                'research_activity_members.role'
+            )
             ->where('research_activity_members.research_activity_id', $id)
             ->get();
+
+        \Log::info('Research members query', [
+            'research_id' => $id,
+            'members_count' => $members->count(),
+            'members' => $members->toArray()
+        ]);
 
         $evidences = DB::table('activity_evidence')
             ->where('category', 'RESEARCH')
@@ -283,7 +348,6 @@ class ResearchController extends Controller
                 'action' => 'SUBMIT_RESEARCH',
                 'entity_type' => 'Research',
                 'entity_id' => $id,
-                'description' => 'Mengirim kegiatan penelitian untuk verifikasi.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

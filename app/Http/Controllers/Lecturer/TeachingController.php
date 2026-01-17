@@ -168,7 +168,6 @@ class TeachingController extends Controller
                 'action' => 'SUBMIT_TEACHING',
                 'entity_type' => 'Teaching',
                 'entity_id' => $id,
-                'description' => 'Mengirim kegiatan pengajaran untuk verifikasi.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

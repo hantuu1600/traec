@@ -159,20 +159,15 @@ class CommunityServiceController extends Controller
     {
         $activity = $this->findOrFail($id);
 
+        // Get members - use COALESCE to get name from users table OR name column
         $members = DB::table(self::MEMBER_TABLE)
-            ->where('community_service_activity_id', $id)
+            ->leftJoin('users', 'users.id', '=', self::MEMBER_TABLE . '.user_id')
+            ->select(
+                DB::raw('COALESCE(users.name, ' . self::MEMBER_TABLE . '.name) as name'),
+                self::MEMBER_TABLE . '.role'
+            )
+            ->where(self::MEMBER_TABLE . '.community_service_activity_id', $id)
             ->get();
-
-        foreach ($members as $member) {
-            if ($member->user_id) {
-                $user = DB::table('users')->where('id', $member->user_id)->first();
-                $member->name_display = $user ? $user->name : 'Unknown User';
-                $member->type_display = 'Internal';
-            } else {
-                $member->name_display = $member->name;
-                $member->type_display = 'Eksternal';
-            }
-        }
 
         $evidences = DB::table(self::EVIDENCE_TABLE)
             ->where('category', self::CATEGORY)
