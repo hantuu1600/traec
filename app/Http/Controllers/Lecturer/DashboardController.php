@@ -28,13 +28,15 @@ class DashboardController extends Controller
         $verifiedCount = $allActivities->where('status', 'VERIFIED')->count();
 
         $stats = [
-            ['label' => 'Total Activities', 'value' => 0, 'icon' => 'total'],
-            ['label' => 'Teaching', 'value' => 0, 'icon' => 'teaching'],
-            ['label' => 'Research', 'value' => 0, 'icon' => 'research'],
-            ['label' => 'Verified', 'value' => 0, 'icon' => 'verified'],
+            ['label' => 'Total Activities', 'value' => $total, 'icon' => 'total'],
+            ['label' => 'Teaching', 'value' => $teachingCount, 'icon' => 'teaching'],
+            ['label' => 'Research', 'value' => $researchCount, 'icon' => 'research'],
+            ['label' => 'Verified', 'value' => $verifiedCount, 'icon' => 'verified'],
         ];
 
+        
 
+        
         $recentTeaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
             ->select([
                 'id',
