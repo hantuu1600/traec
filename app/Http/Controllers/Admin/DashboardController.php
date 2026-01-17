@@ -23,10 +23,10 @@ class DashboardController extends Controller
         $verifiedCount = $allActivities->where('status', 'VERIFIED')->count();
 
         $stats = [
-            ['label' => 'Total Kegiatan', 'value' => $total, 'icon' => 'total'],
-            ['label' => 'Pengajaran', 'value' => $teachingCount, 'icon' => 'teaching'],
-            ['label' => 'Penelitian', 'value' => $researchCount, 'icon' => 'research'],
-            ['label' => 'Terverifikasi', 'value' => $verifiedCount, 'icon' => 'verified'],
+            ['label' => 'Total Activities', 'value' => $total, 'icon' => 'total'],
+            ['label' => 'Teaching', 'value' => $teachingCount, 'icon' => 'teaching'],
+            ['label' => 'Research', 'value' => $researchCount, 'icon' => 'research'],
+            ['label' => 'Verified', 'value' => $verifiedCount, 'icon' => 'verified'],
         ];
 
         //take from Recent Activities

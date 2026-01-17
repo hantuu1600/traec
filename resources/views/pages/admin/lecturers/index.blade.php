@@ -3,11 +3,11 @@
 @section('content')
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-800">Kelola Dosen</h1>
-            <p class="text-gray-500 text-sm">Validasi, tambah, dan atur data seluruh dosen.</p>
+            <h1 class="text-2xl font-bold text-gray-800">Manage Lecturers</h1>
+            <p class="text-gray-500 text-sm">Validate, add, and manage all lecturer data.</p>
         </div>
         <a href="{{ route('admin.lecturers.create') }}" class="btn btn-primary text-white">
-            + Tambah Dosen
+            + Add Lecturer
         </a>
     </div>
 
