@@ -32,7 +32,7 @@
                                 <tr class="hover">
                                     <td class="text-center font-medium opacity-60">{{ $activities->firstItem() + $key }}</td>
                                     <td>
-                                        <div class="font-bold">{{ $item->type }}</div>
+                                        <div class="font-bold">{{ $item->organization ?? 'N/A' }}</div>
                                         <div class="text-xs opacity-60">{{ $item->role }}</div>
                                     </td>
                                     <td>
@@ -62,7 +62,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center py-8 opacity-50">There is no data on supporting activities yet.</td>
+                                    <td colspan="6" class="text-center py-8 opacity-50">There is no data on supporting
+                                        activities yet.</td>
                                 </tr>
                             @endforelse
                         </tbody>

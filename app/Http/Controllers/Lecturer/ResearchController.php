@@ -88,11 +88,18 @@ class ResearchController extends Controller
             ]);
 
             if ($request->has('members')) {
+                $addedMembers = []; // Track added user_ids to prevent duplicates
+
                 foreach ($request->members as $member) {
                     $userId = !empty($member['user_id']) ? $member['user_id'] : null;
                     $name = !empty($member['name']) ? $member['name'] : null;
 
                     if ($userId || $name) {
+                        // Check for duplicate internal members
+                        if ($userId && in_array($userId, $addedMembers)) {
+                            continue; // Skip duplicate
+                        }
+
                         DB::table('research_activity_members')->insert([
                             'research_activity_id' => $id,
                             'user_id' => $userId,
@@ -101,15 +108,36 @@ class ResearchController extends Controller
                             'created_at' => now(),
                             'updated_at' => now(),
                         ]);
+
+                        if ($userId) {
+                            $addedMembers[] = $userId;
+                        }
                     }
                 }
             }
 
             DB::commit();
             return redirect()->route('lecturer.research.index')->with('success', 'Data penelitian berhasil ditambahkan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Research creation failed', [
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+
+            // Check for specific database errors
+            if (str_contains($e->getMessage(), 'Duplicate entry')) {
+                return back()->with('error', 'Data penelitian sudah ada atau anggota duplikat terdeteksi.')->withInput();
+            }
+
+            return back()->with('error', 'Gagal menyimpan data. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal menambahkan data penelitian: ' . $e->getMessage());
+            \Log::error('Unexpected error in research creation', [
+                'user_id' => \Illuminate\Support\Facades\Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 

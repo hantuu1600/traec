@@ -24,7 +24,7 @@ class SupportController extends Controller
 
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where('type', 'like', "%{$search}%")
+            $query->where('organization', 'like', "%{$search}%")
                 ->orWhere('role', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%");
         }
@@ -45,7 +45,8 @@ class SupportController extends Controller
     {
         $activity = (object) [
             'id' => null,
-            'type' => '',
+            'type_id' => null,
+            'organization' => '',
             'role' => '',
             'activity_date' => '',
             'description' => '',
@@ -61,10 +62,11 @@ class SupportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'activity_date' => 'required|date',
-            'description' => 'required|string',
+            'type_id' => 'nullable|exists:ref_activity_types,id',
+            'organization' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:100',
+            'activity_date' => 'nullable|date',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $period = DB::table('periods')->where('is_active', true)->first();
@@ -74,7 +76,8 @@ class SupportController extends Controller
             DB::table(self::ACTIVITY_TABLE)->insert([
                 'user_id' => Auth::id(),
                 'period_id' => $periodId,
-                'type' => $request->type,
+                'type_id' => $request->type_id,
+                'organization' => $request->organization,
                 'role' => $request->role,
                 'activity_date' => $request->activity_date,
                 'description' => $request->description,
@@ -84,8 +87,18 @@ class SupportController extends Controller
             ]);
 
             return redirect()->route('lecturer.support.index')->with('success', 'Support activity has been successfully added.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error('Support activity creation failed', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Gagal menyimpan data. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to add data: ' . $e->getMessage());
+            \Log::error('Unexpected error in support activity creation', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 
@@ -129,15 +142,17 @@ class SupportController extends Controller
         }
 
         $request->validate([
-            'type' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'activity_date' => 'required|date',
-            'description' => 'required|string',
+            'type_id' => 'nullable|exists:ref_activity_types,id',
+            'organization' => 'nullable|string|max:255',
+            'role' => 'nullable|string|max:100',
+            'activity_date' => 'nullable|date',
+            'description' => 'nullable|string|max:255',
         ]);
 
         try {
             DB::table(self::ACTIVITY_TABLE)->where('id', $id)->update([
-                'type' => $request->type,
+                'type_id' => $request->type_id,
+                'organization' => $request->organization,
                 'role' => $request->role,
                 'activity_date' => $request->activity_date,
                 'description' => $request->description,
@@ -145,8 +160,20 @@ class SupportController extends Controller
             ]);
 
             return redirect()->route('lecturer.support.index')->with('success', 'Changes have been successfully saved.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error('Support activity update failed', [
+                'user_id' => Auth::id(),
+                'activity_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Gagal menyimpan perubahan. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to save changes: ' . $e->getMessage());
+            \Log::error('Unexpected error in support activity update', [
+                'user_id' => Auth::id(),
+                'activity_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 

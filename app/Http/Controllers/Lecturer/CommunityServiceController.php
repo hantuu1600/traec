@@ -52,7 +52,7 @@ class CommunityServiceController extends Controller
         $activity = (object) [
             'id' => null,
             'title' => '',
-            'partner' => '',
+            'scheme' => '',
             'location' => '',
             'start_date' => '',
             'end_date' => '',
@@ -72,7 +72,7 @@ class CommunityServiceController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'partner' => 'nullable|string|max:255',
+            'scheme' => 'nullable|string|max:100',
             'location' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
@@ -92,7 +92,7 @@ class CommunityServiceController extends Controller
                 'user_id' => Auth::id(),
                 'period_id' => $periodId,
                 'title' => $request->title,
-                'partner' => $request->partner,
+                'scheme' => $request->scheme,
                 'location' => $request->location,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -103,11 +103,18 @@ class CommunityServiceController extends Controller
             ]);
 
             if ($request->has('members')) {
+                $addedMembers = []; // Track added user_ids to prevent duplicates
+
                 foreach ($request->members as $member) {
                     $userId = $member['user_id'] ?? null;
                     $name = $member['name'] ?? null;
 
                     if ($userId || $name) {
+                        // Check for duplicate internal members
+                        if ($userId && in_array($userId, $addedMembers)) {
+                            continue; // Skip duplicate
+                        }
+
                         DB::table(self::MEMBER_TABLE)->insert([
                             'community_service_activity_id' => $id,
                             'user_id' => $userId,
@@ -116,15 +123,35 @@ class CommunityServiceController extends Controller
                             'created_at' => now(),
                             'updated_at' => now(),
                         ]);
+
+                        if ($userId) {
+                            $addedMembers[] = $userId;
+                        }
                     }
                 }
             }
 
             DB::commit();
             return redirect()->route('lecturer.community-service.index')->with('success', 'Data pengabdian berhasil ditambahkan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Community service creation failed', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+
+            if (str_contains($e->getMessage(), 'Duplicate entry')) {
+                return back()->with('error', 'Data pengabdian sudah ada atau anggota duplikat terdeteksi.')->withInput();
+            }
+
+            return back()->with('error', 'Gagal menyimpan data. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal menambahkan data: ' . $e->getMessage());
+            \Log::error('Unexpected error in community service creation', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 
@@ -197,7 +224,7 @@ class CommunityServiceController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'partner' => 'nullable|string|max:255',
+            'scheme' => 'nullable|string|max:100',
             'location' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
@@ -209,7 +236,7 @@ class CommunityServiceController extends Controller
         try {
             DB::table(self::ACTIVITY_TABLE)->where('id', $id)->update([
                 'title' => $request->title,
-                'partner' => $request->partner,
+                'scheme' => $request->scheme,
                 'location' => $request->location,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -239,9 +266,22 @@ class CommunityServiceController extends Controller
 
             DB::commit();
             return redirect()->route('lecturer.community-service.index')->with('success', 'Perubahan berhasil disimpan.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            DB::rollBack();
+            \Log::error('Community service update failed', [
+                'user_id' => Auth::id(),
+                'activity_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Gagal menyimpan perubahan. Silakan periksa kembali inputan Anda.')->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Gagal menyimpan perubahan: ' . $e->getMessage());
+            \Log::error('Unexpected error in community service update', [
+                'user_id' => Auth::id(),
+                'activity_id' => $id,
+                'error' => $e->getMessage()
+            ]);
+            return back()->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi atau hubungi administrator.')->withInput();
         }
     }
 

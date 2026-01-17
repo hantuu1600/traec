@@ -5,7 +5,7 @@
         {{-- Header Status --}}
         <div class="flex justify-between items-start">
             <div>
-                <h1 class="text-3xl font-bold text-base-content">{{ $activity->type }}</h1>
+                <h1 class="text-3xl font-bold text-base-content">{{ $activity->organization ?? 'Support Activity' }}</h1>
                 <div class="flex items-center gap-2 mt-2">
                     <span
                         class="badge badge-lg {{ $activity->status == 'VERIFIED' ? 'badge-success' : ($activity->status == 'REJECTED' ? 'badge-error' : ($activity->status == 'SUBMITTED' ? 'badge-info' : 'badge-ghost')) }}">
@@ -33,7 +33,8 @@
                         <div>
                             <label class="text-xs uppercase font-bold opacity-50">Activity Date</label>
                             <p class="font-medium text-lg">
-                                {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }}</p>
+                                {{ \Carbon\Carbon::parse($activity->activity_date)->format('d M Y') }}
+                            </p>
                         </div>
                         <div class="sm:col-span-2">
                             <label class="text-xs uppercase font-bold opacity-50">Description</label>
