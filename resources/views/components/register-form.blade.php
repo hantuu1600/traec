@@ -11,166 +11,146 @@
 
             {{-- Heading --}}
             <div class="text-center space-y-3">
-                <h1 class="text-3xl font-extrabold text-secondary">Create Account</h1>
-                <p class="text-sm text-secondary/70">Please fill in the form to register.</p>
+                <h1 class="text-3xl font-extrabold text-secondary">Buat Akun Baru</h1>
+                <p class="text-sm text-secondary/70">Lengkapi data diri Anda untuk mulai bergabung di
+                    <strong>Tremic</strong>.</p>
             </div>
 
             {{-- Register Form --}}
-            <form id="registerForm" method="POST" action="{{ route('register.process') }}" class="space-y-5" novalidate>
+            <form id="registerForm" method="POST" action="{{ route('register.process') }}" class="space-y-4" novalidate>
                 @csrf
 
                 {{-- Name --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Full Name</span>
+                        <span class="label-text text-secondary font-medium">Nama Lengkap</span>
                     </label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="reg_name"
-                        placeholder="Your full name"
-                        class="input input-bordered w-full"
-                    >
-                    <p id="regNameError" class="text-sm text-error hidden mt-1">
-                        Name must be at least 3 characters.
-                    </p>
+                    <input type="text" name="name" id="reg_name" value="{{ old('name') }}"
+                        placeholder="Contoh: Budi Santoso, M.Kom" minlength="3" required
+                        class="input input-bordered w-full @error('name') input-error @enderror">
+                    @error('name')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Email --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Email</span>
+                        <span class="label-text text-secondary font-medium">Email Institusi</span>
                     </label>
-                    <input
-                        type="text"
-                        name="email"
-                        id="reg_email"
-                        placeholder="email@example.com"
-                        class="input input-bordered w-full"
-                    >
-                    <p id="regEmailError" class="text-sm text-error hidden mt-1">
-                        Please enter a valid email address.
-                    </p>
+                    <input type="email" name="email" id="reg_email" value="{{ old('email') }}"
+                        placeholder="dosen@widyatama.ac.id" required
+                        class="input input-bordered w-full @error('email') input-error @enderror">
+                    @error('email')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Password --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Password</span>
+                        <span class="label-text text-secondary font-medium">Password</span>
                     </label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="reg_password"
-                        placeholder="••••••••"
-                        class="input input-bordered w-full"
-                    >
-                    <p id="regPasswordError" class="text-sm text-error hidden mt-1">
-                        Password must be at least 8 characters.
-                    </p>
+                    <input type="password" name="password" id="reg_password" placeholder="Minimal 8 karakter"
+                        minlength="8" required
+                        class="input input-bordered w-full @error('password') input-error @enderror">
+                    @error('password')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- NIDN --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">NIDN</span>
+                        <span class="label-text text-secondary font-medium">NIDN</span>
                     </label>
-                    <input
-                        type="text"
-                        name="nidn"
-                        id="reg_nidn"
-                        placeholder="Numeric NIDN"
-                        class="input input-bordered w-full"
-                    >
-                    <p id="regNidnError" class="text-sm text-error hidden mt-1">
-                        NIDN must contain numbers only (min 6 digits).
-                    </p>
+                    <input type="text" name="nidn" id="reg_nidn" value="{{ old('nidn') }}"
+                        placeholder="Contoh: 0412345678" pattern="[0-9]+" minlength="6" inputmode="numeric" required
+                        class="input input-bordered w-full @error('nidn') input-error @enderror">
+                    @error('nidn')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Prodi --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Program Study (Prodi)</span>
+                        <span class="label-text text-secondary font-medium">Program Studi</span>
                     </label>
-                    <select name="prodi" id="reg_prodi" class="select select-bordered w-full">
-                        <option value="" selected>Choose Prodi</option>
-                        <option value="Informatika">Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Teknik Industri">Teknik Industri</option>
-                        <option value="Manajemen">Manajemen</option>
-                        <option value="Akuntansi">Akuntansi</option>
-                        <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
-                        <option value="Bahasa Inggris">Bahasa Inggris</option>
+                    <select name="prodi" id="reg_prodi" required
+                        class="select select-bordered w-full @error('prodi') select-error @enderror">
+                        <option value="" disabled selected>Pilih Program Studi</option>
+                        @foreach(['Informatika', 'Sistem Informasi', 'Teknik Industri', 'Manajemen', 'Akuntansi', 'Desain Komunikasi Visual', 'Bahasa Inggris'] as $prodi)
+                            <option value="{{ $prodi }}" {{ old('prodi') == $prodi ? 'selected' : '' }}>{{ $prodi }}</option>
+                        @endforeach
                     </select>
-                    <p id="regProdiError" class="text-sm text-error hidden mt-1">
-                        Please choose a Prodi.
-                    </p>
+                    @error('prodi')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Faculty --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Faculty</span>
+                        <span class="label-text text-secondary font-medium">Fakultas</span>
                     </label>
-                    <select name="faculty" id="reg_faculty" class="select select-bordered w-full">
-                        <option value="" selected>Choose Your Faculty</option>
-                        <option value="Fakultas Teknik">Fakultas Teknik</option>
-                        <option value="Fakultas Bisnis & Manajemen">Fakultas Bisnis & Manajemen</option>
-                        <option value="Fakultas Ekonomi">Fakultas Ekonomi</option>
-                        <option value="Fakultas Seni & Desain">Fakultas Seni & Desain</option>
-                        <option value="Fakultas Bahasa">Fakultas Bahasa</option>
+                    <select name="faculty" id="reg_faculty" required
+                        class="select select-bordered w-full @error('faculty') select-error @enderror">
+                        <option value="" disabled selected>Pilih Fakultas</option>
+                        @foreach(['Fakultas Teknik', 'Fakultas Bisnis & Manajemen', 'Fakultas Ekonomi', 'Fakultas Seni & Desain', 'Fakultas Bahasa'] as $faculty)
+                            <option value="{{ $faculty }}" {{ old('faculty') == $faculty ? 'selected' : '' }}>{{ $faculty }}
+                            </option>
+                        @endforeach
                     </select>
-                    <p id="regFacultyError" class="text-sm text-error hidden mt-1">
-                        Please choose a Faculty.
-                    </p>
+                    @error('faculty')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Position --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Position</span>
+                        <span class="label-text text-secondary font-medium">Jabatan Akademik</span>
                     </label>
-                    <select name="position" id="reg_position" class="select select-bordered w-full">
-                        <option value="" selected>Choose Your Position</option>
-                        <option value="Dosen">Dosen</option>
-                        <option value="Kaprodi">Head of Program (Kaprodi)</option>
-                        <option value="Sekprodi">Secretary of Program (Sekprodi)</option>
-                        <option value="Dekan">Dean (Dekan)</option>
-                        <option value="Wakil Dekan">Vice Dean (Wakil Dekan)</option>
-                        <option value="Staff Pengajar">Teaching Staff</option>
-                        <option value="Peneliti">Researcher</option>
+                    <select name="position" id="reg_position" required
+                        class="select select-bordered w-full @error('position') select-error @enderror">
+                        <option value="" disabled selected>Pilih Jabatan</option>
+                        @foreach(['Dosen', 'Kaprodi', 'Sekprodi', 'Dekan', 'Wakil Dekan', 'Staff Pengajar', 'Peneliti'] as $position)
+                            <option value="{{ $position }}" {{ old('position') == $position ? 'selected' : '' }}>
+                                {{ $position }}
+                            </option>
+                        @endforeach
                     </select>
-                    <p id="regPositionError" class="text-sm text-error hidden mt-1">
-                        Please choose a Position.
-                    </p>
+                    @error('position')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Phone Number --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Phone Number</span>
+                        <span class="label-text text-secondary font-medium">Nomor WhatsApp / HP</span>
                     </label>
-                    <input
-                        type="text"
-                        name="phonenumber"
-                        id="reg_phone"
-                        placeholder="+6281598761215"
-                        class="input input-bordered w-full"
-                    >
-                    <p id="regPhoneError" class="text-sm text-error hidden mt-1">
-                        Phone number must be 10–15 digits (may start with +62).
-                    </p>
+                    <input type="tel" name="phonenumber" id="reg_phone" value="{{ old('phonenumber') }}"
+                        placeholder="Contoh: 08123456789" minlength="10" maxlength="15" required
+                        class="input input-bordered w-full @error('phonenumber') input-error @enderror">
+                    @error('phonenumber')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Submit --}}
-                <button type="submit" class="btn btn-primary w-full text-white font-semibold">
-                    Register
+                <button type="submit" class="btn btn-primary w-full text-white font-bold text-lg">
+                    Daftar Sekarang
                 </button>
 
                 {{-- Back to Login --}}
-                <a href="/pages/login" class="btn btn-outline btn-secondary w-full font-semibold">
-                    Back to Login
-                </a>
+                <div class="text-center pt-2">
+                    <a href="{{ route('login') }}"
+                        class="link link-secondary no-underline hover:underline text-sm font-medium">
+                        Sudah punya akun? <span class="text-primary">Login di sini</span>
+                    </a>
+                </div>
             </form>
 
         </div>

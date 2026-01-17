@@ -4,20 +4,16 @@
 
             {{-- Logo --}}
             <div class="flex items-center justify-center gap-4">
-                
+
                 {{-- UTama Logo --}}
-                <img src="{{ asset('images/widyatama.webp') }}"
-                    class="h-12 w-auto"
-                    alt="UTama Logo">
+                <img src="{{ asset('images/widyatama.webp') }}" class="h-12 w-auto" alt="UTama Logo">
 
                 <div class="w-0.5 h-10 bg-secondary opacity-40"></div>
 
                 {{-- Tremic Logo --}}
-                <img src="{{ asset('images/logo.webp') }}"
-                    class="h-12 w-auto"
-                    alt="Tremic Logo">
+                <img src="{{ asset('images/logo.webp') }}" class="h-12 w-auto" alt="Tremic Logo">
             </div>
-        
+
             {{-- heading --}}
             <div class="text-center space-y-3">
                 <h1 class="text-3xl font-extrabold text-secondary">
@@ -25,7 +21,7 @@
                 </h1>
 
                 <p class="text-sm text-secondary/70">
-                    Please sign in using your Email/NIDN and password.
+                    Silakan masuk menggunakan Email atau NIDN Anda.
                 </p>
             </div>
 
@@ -43,65 +39,59 @@
                 {{-- Email / NIDN field --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Email / NIDN</span>
+                        <span class="label-text text-secondary font-medium">Email / NIDN</span>
                     </label>
 
-                    <input
-                        type="text"
-                        name="login_id"
-                        id="login_id"
-                        placeholder="email@university.ac.id / NIDN"
-                        class="input input-bordered w-full"
-                    >
+                    <input type="text" name="login_id" id="login_id" value="{{ old('login_id') }}"
+                        placeholder="email@widyatama.ac.id / 041xxxx"
+                        class="input input-bordered w-full @error('login_id') input-error @enderror">
 
-                    <p id="loginIdError" class="text-sm text-error hidden mt-1">
-                        Please enter a valid email address or numeric NIDN.
-                    </p>
+                    @error('login_id')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Password field --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary">Password</span>
+                        <span class="label-text text-secondary font-medium">Password</span>
                     </label>
 
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="••••••••"
-                        class="input input-bordered w-full"
-                    >
+                    <input type="password" name="password" id="password" placeholder="••••••••"
+                        class="input input-bordered w-full @error('password') input-error @enderror">
 
-                    <p id="passwordError" class="text-sm text-error hidden mt-1">
-                        Password must be at least 8 characters long.
-                    </p>
+                    @error('password')
+                        <p class="text-sm text-error mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Remember me + Forgot password --}}
                 <div class="flex items-center justify-between text-sm">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" class="checkbox checkbox-sm checkbox-primary">
-                        <span class="text-secondary">Remember me</span>
+                        <span class="text-secondary">Ingat saya</span>
                     </label>
 
-                    <a href="#" class="text-primary hover:underline">
-                        Forgot password?
+                    <a href="#" class="text-primary hover:underline font-medium">
+                        Lupa password?
                     </a>
                 </div>
 
                 {{-- Action buttons --}}
                 <div class="space-y-2 pt-3">
-                    <button type="submit" class="btn btn-primary w-full text-white font-semibold">
-                        Log in
+                    <button type="submit" class="btn btn-primary w-full text-white font-bold text-lg">
+                        Masuk Aplikasi
                     </button>
-                <br>
-                <p class="text-sm text-secondary/70">
-                    Don't have an account yet?
-                </p>
-                    <a href="register" class="btn btn-outline btn-secondary w-full font-semibold">
-                        Register
-                    </a>
+                    <br>
+                    <div class="text-center">
+                        <p class="text-sm text-secondary/70 inline-block">
+                            Belum punya akun?
+                        </p>
+                        <a href="{{ route('register') }}"
+                            class="link link-secondary no-underline hover:underline text-sm font-medium ml-1">
+                            Daftar Sekarang
+                        </a>
+                    </div>
                 </div>
             </form>
 

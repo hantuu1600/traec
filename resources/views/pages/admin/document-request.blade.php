@@ -1,30 +1,22 @@
-@extends('layouts.dashboard-admin-layout', ['title' => 'Documents'])
+@extends('layouts.dashboard-admin-layout', ['title' => $title ?? 'Documents'])
 
 @section('content')
-@php
-$rows = [
-  [
-    'lecturer' => 'Dr. Andi Pratama',
-    'prodi' => 'Teknik Informatika',
-    'title' => 'Pengajaran Web Lanjut',
-    'category' => 'Teaching',
-    'period' => '2025/2026 - Ganjil',
-    'evidence_count' => 3,
-    'status' => 'SUBMITTED',
-    'submitted_at' => '02 Jan 2026',
-  ],
-  [
-    'lecturer' => 'Rina Sari, M.Kom',
-    'prodi' => 'Sistem Informasi',
-    'title' => 'Publikasi Jurnal CNN',
-    'category' => 'Research',
-    'period' => '2025',
-    'evidence_count' => 1,
-    'status' => 'VERIFIED',
-    'submitted_at' => '28 Dec 2025',
-  ],
-];
-@endphp
+    <div class="space-y-6">
 
-<x-request-activity-table :rows="$rows" />
+        <div class="flex flex-col gap-1">
+            <h1 class="text-2xl font-semibold text-secondary">Document Requests</h1>
+            <p class="text-sm text-base-content/60">Review submissions from lecturers and verify documents.</p>
+        </div>
+
+        <div class="card bg-base-100 border border-base-300">
+            <div class="card-body p-4 lg:p-6 space-y-4">
+                <x-request-activity-table :rows="$rows" />
+
+                <div class="flex justify-end">
+                    {{ $rows->links() }}
+                </div>
+            </div>
+        </div>
+
+    </div>
 @endsection

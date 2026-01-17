@@ -6,8 +6,8 @@
     <div class="bg-base-100 border border-base-300 rounded-2xl shadow-sm overflow-hidden">
     <div class="p-4 flex items-center justify-between gap-3">
         <div>
-        <h2 class="text-lg font-bold text-base-content">Activities</h2>
-        <p class="text-sm text-base-content/60">Search & filter activities</p>
+        <h2 class="text-lg font-bold text-base-content">Daftar Aktivitas</h2>
+        <p class="text-sm text-base-content/60">Pantau status kegiatan akademik Anda</p>
         </div>
 
     </div>
@@ -16,14 +16,14 @@
         <table class="table">
         <thead>
             <tr class="text-base-content/70">
-            <th>Category</th>
-            <th>Lecturer</th>
-            <th>Activity</th>
-            <th>Period</th>
-            <th>Date</th>
+            <th>Kategori</th>
+            <th>Dosen</th>
+            <th>Aktivitas</th>
+            <th>Periode</th>
+            <th>Tanggal</th>
             <th>Status</th>
-            <th>Updated</th>
-            <th class="text-center">Actions</th>
+            <th>Diperbarui</th>
+            <th class="text-center">Aksi</th>
             </tr>
         </thead>
 
@@ -83,7 +83,7 @@
             @empty
             <tr>
                 <td colspan="8" class="text-center py-10 text-base-content/60">
-                No activities found.
+                Belum ada aktivitas ditemukan.
                 </td>
             </tr>
             @endforelse
@@ -91,9 +91,15 @@
         </table>
     </div>
 
-    {{-- pagination placeholder --}}
-    <div class="p-4 border-t border-base-300 text-sm text-base-content/60">
-        Showing {{ count($rows) }} items
+    {{-- pagination --}}
+    <div class="p-4 border-t border-base-300">
+        @if(method_exists($rows, 'links'))
+            {{ $rows->links() }}
+        @else
+            <div class="text-sm text-base-content/60">
+                Showing {{ count($rows) }} items
+            </div>
+        @endif
     </div>
     </div>
 </div>

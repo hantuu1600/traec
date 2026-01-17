@@ -235,19 +235,21 @@ const sidebar = document.getElementById('sidebar');
 const toggle = document.getElementById('sidebarToggle');
 const arrow = document.getElementById('sidebarArrow');
 
-toggle.addEventListener('click', () => {
-  const isCollapsed = sidebar.classList.toggle('w-20');
-  sidebar.classList.toggle('w-64');
+if (toggle && sidebar && arrow) {
+  toggle.addEventListener('click', () => {
+    const isCollapsed = sidebar.classList.toggle('w-20');
+    sidebar.classList.toggle('w-64');
 
-  document.querySelectorAll('.menu-text').forEach(el => {
-    el.classList.toggle('hidden', isCollapsed);
+    document.querySelectorAll('.menu-text').forEach(el => {
+      el.classList.toggle('hidden', isCollapsed);
+    });
+
+    document.querySelectorAll('#sidebar nav a').forEach(a => {
+      a.classList.toggle('justify-center', isCollapsed);
+      a.classList.toggle('px-4', !isCollapsed);
+      a.classList.toggle('px-2', isCollapsed);
+    });
+
+    arrow.classList.toggle('rotate-180');
   });
-
-  document.querySelectorAll('#sidebar nav a').forEach(a => {
-    a.classList.toggle('justify-center', isCollapsed);
-    a.classList.toggle('px-4', !isCollapsed);
-    a.classList.toggle('px-2', isCollapsed);
-  });
-
-  arrow.classList.toggle('rotate-180');
-});
+}
