@@ -38,7 +38,6 @@ class ResearchController extends Controller
             ->orderBy('name')
             ->get();
 
-        // Mock object for the component
         $research = (object) [
             'id' => null,
             'title' => '',
@@ -90,7 +89,6 @@ class ResearchController extends Controller
 
             if ($request->has('members')) {
                 foreach ($request->members as $member) {
-                    // Determine if Internal (by user_id) or External (by name)
                     $userId = !empty($member['user_id']) ? $member['user_id'] : null;
                     $name = !empty($member['name']) ? $member['name'] : null;
 
@@ -145,12 +143,12 @@ class ResearchController extends Controller
     {
         $this->findOrFail($id);
 
-        // Simple Validation
+        //validation
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'role' => 'required|string|max:100',
             'year' => 'required|integer|min:1900|max:2100',
-            // Add other fields as needed based on your table
+            // add other fields later
         ]);
 
         DB::table('research_activities')->where('id', $id)->update([

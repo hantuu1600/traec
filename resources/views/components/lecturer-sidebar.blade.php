@@ -98,7 +98,7 @@
             </span>
 
             <span class="menu-text text-sm {{ $isActive('lecturer.support.*') ? 'font-semibold' : 'font-medium' }}">
-                Penunjang
+                Other Activities
             </span>
         </a>
 
@@ -115,7 +115,7 @@
             </span>
 
             <span class="menu-text text-sm {{ $isActive('lecturer.profile') ? 'font-semibold' : 'font-medium' }}">
-                Setting
+                Settings
             </span>
         </a>
 

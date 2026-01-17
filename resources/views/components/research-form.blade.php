@@ -13,7 +13,7 @@
         {{-- Title --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Judul Penelitian</span>
+                <span class="label-text font-medium">Research Title</span>
             </label>
             <input type="text" name="title" class="input input-bordered w-full"
                 value="{{ old('title', $research->title) }}" required>
@@ -22,7 +22,7 @@
         {{-- Type ID --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Jenis Penelitian (ID)</span>
+                <span class="label-text font-medium">Research Type (ID)</span>
             </label>
             <input type="number" name="type_id" class="input input-bordered w-full"
                 value="{{ old('type_id', $research->type_id) }}">
@@ -31,7 +31,7 @@
         {{-- Rank ID --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Tingkat / Rank (ID)</span>
+                <span class="label-text font-medium">Level / Rank (ID)</span>
             </label>
             <input type="number" name="rank_id" class="input input-bordered w-full"
                 value="{{ old('rank_id', $research->rank_id) }}">
@@ -40,16 +40,16 @@
         {{-- Role --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Peran</span>
+                <span class="label-text font-medium">Role</span>
             </label>
             <input type="text" name="role" class="input input-bordered w-full"
-                value="{{ old('role', $research->role) }}" placeholder="Penulis Utama / Anggota">
+                value="{{ old('role', $research->role) }}" placeholder="Author / Member">
         </div>
 
         {{-- Publisher --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Penerbit</span>
+                <span class="label-text font-medium">Publisher</span>
             </label>
             <input type="text" name="publisher" class="input input-bordered w-full"
                 value="{{ old('publisher', $research->publisher) }}">
@@ -58,7 +58,7 @@
         {{-- Year --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Tahun</span>
+                <span class="label-text font-medium">Year</span>
             </label>
             <input type="number" name="year" class="input input-bordered w-full"
                 value="{{ old('year', $research->year) }}">
@@ -75,7 +75,7 @@
         {{-- Link --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Link Publikasi</span>
+                <span class="label-text font-medium">Publication Link</span>
             </label>
             <input type="url" name="link" class="input input-bordered w-full"
                 value="{{ old('link', $research->link) }}">
@@ -84,10 +84,10 @@
         {{-- Members Section --}}
         <div class="md:col-span-2 space-y-3 pt-4 border-t border-base-200">
             <div class="flex items-center justify-between gap-3">
-                <h3 class="text-md font-semibold text-secondary">Anggota Peneliti</h3>
+                <h3 class="text-md font-semibold text-secondary">Research Members</h3>
 
                 <button type="button" id="add-member-btn" class="btn btn-sm btn-outline btn-primary">
-                    + Tambah Anggota
+                    + Add Member
                 </button>
             </div>
 
@@ -95,17 +95,17 @@
                 <table class="table table-sm bg-base-100">
                     <thead>
                         <tr>
-                            <th class="w-32">Tipe</th>
-                            <th>Nama Anggota</th>
-                            <th>Peran</th>
-                            <th class="text-center w-20">Aksi</th>
+                            <th class="w-32">Type</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th class="text-center w-20">Action</th>
                         </tr>
                     </thead>
                     <tbody id="members-table-body"></tbody>
                 </table>
             </div>
             <p class="text-sm text-base-content/60">
-                Tambahkan dosen (Internal) atau mahasiswa/pihak luar (Eksternal).
+                Add lecturers (Internal) or students/external parties (External).
             </p>
         </div>
     </div>

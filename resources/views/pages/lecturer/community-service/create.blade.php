@@ -3,8 +3,8 @@
 @section('content')
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
 
-        <x-lecturer-page-header title="Tambah Pengabdian Masyarakat"
-            description="Tambahkan data kegiatan pengabdian baru." />
+        <x-lecturer-page-header title="Add Community Service"
+            description="Add new community service activity data." />
 
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body p-4 lg:p-6 space-y-6">
@@ -14,11 +14,11 @@
 
         <div class="flex justify-end gap-3 pt-4">
             <a href="{{ route('lecturer.community-service.index') }}" class="btn btn-outline btn-secondary">
-                Batal
+                Cancel
             </a>
 
             <button form="community-form" type="submit" class="btn btn-primary">
-                Simpan
+                Save
             </button>
         </div>
 
@@ -66,8 +66,8 @@
                 row.innerHTML = `
                     <td>
                         <select class="select select-bordered select-sm w-full mb-1 member-type-select">
-                            <option value="internal" ${isInternal ? 'selected' : ''}>Dosen (Internal)</option>
-                            <option value="external" ${!isInternal ? 'selected' : ''}>Eksternal / Mahasiswa</option>
+                            <option value="internal" ${isInternal ? 'selected' : ''}>Lecturer (Internal)</option>
+                            <option value="external" ${!isInternal ? 'selected' : ''}>External / Student</option>
                         </select>
                     </td>
                     <td>
@@ -78,18 +78,18 @@
                             <input type="text" name="members[${i}][name]" 
                                    value="${name}"
                                    class="input input-bordered input-sm w-full external-input ${isInternal ? 'hidden' : ''}" 
-                                   placeholder="Nama Lengkap" ${isInternal ? 'disabled' : ''}>
+                                   placeholder="Full Name" ${isInternal ? 'disabled' : ''}>
                         </div>
                     </td>
                     <td>
                         <input type="text" name="members[${i}][role]"
                                value="${role}"
                                class="input input-bordered input-sm w-full"
-                               placeholder="Peran">
+                               placeholder="Role">
                     </td>
                     <td class="text-center">
                         <button type="button" class="btn btn-xs btn-outline btn-error remove-member-btn">
-                            Hapus
+                            Remove
                         </button>
                     </td>
                     `;

@@ -6,26 +6,26 @@
     <div class="bg-base-100 border border-base-300 rounded-2xl shadow-sm overflow-hidden">
     <div class="p-4 flex items-center justify-between gap-3">
         <div>
-        <h2 class="text-lg font-bold text-base-content">Daftar Aktivitas Masuk</h2>
-        <p class="text-sm text-base-content/60">Verifikasi dan kelola dokumen dosen</p>
+        <h2 class="text-lg font-bold text-base-content">Login Activity List</h2>
+        <p class="text-sm text-base-content/60">Verify and manage lecturer documents</p>
         </div>
 
-        <a href="#" class="btn btn-sm btn-primary rounded-full">+ Tambah</a>
+        <a href="#" class="btn btn-sm btn-primary rounded-full">+ Add activity</a>
     </div>
 
     <div class="overflow-x-auto">
         <table class="table">
         <thead>
             <tr class="text-base-content/70">
-            <th>Kategori</th>
-            <th>Dosen</th>
-            <th>Aktivitas</th>
-            <th>Periode</th>
-            <th>Tanggal</th>
+            <th>Category</th>
+            <th>Lecturer</th>
+            <th>Activity</th>
+            <th>Period</th>
+            <th>Date</th>
             <th>Status</th>
-            <th class="text-center">Bukti</th>
-            <th>Diperbarui</th>
-            <th class="text-center">Aksi</th>
+            <th class="text-center">Evidence</th>
+            <th>Updated</th>
+            <th class="text-center">Action</th>
             </tr>
         </thead>
 

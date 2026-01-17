@@ -5,7 +5,7 @@
         <div class="flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-bold text-base-content">Activity Logs</h1>
-                <p class="text-sm text-base-content/60">Pantau aktivitas pengguna sistem.</p>
+                <p class="text-sm text-base-content/60">Monitor system user activity.</p>
             </div>
         </div>
 
@@ -21,11 +21,11 @@
                     <table class="table table-zebra w-full text-sm">
                         <thead>
                             <tr class="bg-base-200">
-                                <th>Waktu</th>
+                                <th>Time</th>
                                 <th>User</th>
-                                <th>Aksi</th>
-                                <th>Deskripsi</th>
-                                <th class="text-center">Aksi</th>
+                                <th>Action</th>
+                                <th>Description</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center py-4 opacity-50">Tidak ada log.</td>
+                                    <td colspan="5" class="text-center py-4 opacity-50">No logs found.</td>
                                 </tr>
                             @endforelse
                         </tbody>

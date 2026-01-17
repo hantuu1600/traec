@@ -1,32 +1,32 @@
 @extends('layouts.dashboard-lecturer-layout')
 
 @section('content')
-    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
 
-        <x-lecturer-page-header title="Pengabdian Masyarakat"
-            description="Kelola kegiatan pengabdian kepada masyarakat (PKM)." />
+        <x-lecturer-page-header title="Community Service"
+            description="Manage community service activities (PKM)." />
 
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body p-0">
                 <div class="p-4 border-b border-base-200 flex flex-col sm:flex-row gap-4 justify-between items-center">
                     <form method="GET" class="join w-full sm:w-auto">
                         <input type="text" name="search" class="input input-bordered join-item w-full sm:w-64"
-                            placeholder="Cari judul..." value="{{ request('search') }}">
+                            placeholder="Search services..." value="{{ request('search') }}">
                         <select name="status" class="select select-bordered join-item" onchange="this.form.submit()">
-                            <option value="ALL">Semua Status</option>
+                            <option value="ALL">All Status</option>
                             <option value="DRAFT" {{ request('status') == 'DRAFT' ? 'selected' : '' }}>Draft</option>
-                            <option value="SUBMITTED" {{ request('status') == 'SUBMITTED' ? 'selected' : '' }}>Diajukan
+                            <option value="SUBMITTED" {{ request('status') == 'SUBMITTED' ? 'selected' : '' }}>Submitted
                             </option>
-                            <option value="VERIFIED" {{ request('status') == 'VERIFIED' ? 'selected' : '' }}>Terverifikasi
+                            <option value="VERIFIED" {{ request('status') == 'VERIFIED' ? 'selected' : '' }}>Verified
                             </option>
-                            <option value="REJECTED" {{ request('status') == 'REJECTED' ? 'selected' : '' }}>Ditolak
+                            <option value="REJECTED" {{ request('status') == 'REJECTED' ? 'selected' : '' }}>Rejected
                             </option>
                         </select>
                         <button class="btn btn-primary join-item">Cari</button>
                     </form>
 
                     <a href="{{ route('lecturer.community-service.create') }}" class="btn btn-primary">
-                        + Tambah
+                        + Add Community Service
                     </a>
                 </div>
 
@@ -35,11 +35,11 @@
                         <thead>
                             <tr class="bg-base-200 text-base-content/70">
                                 <th class="w-16 text-center">No</th>
-                                <th>Judul Kegiatan</th>
-                                <th>Mitra & Lokasi</th>
-                                <th class="text-center">Tanggal</th>
+                                <th>Activity Title</th>
+                                <th>Partner & Location</th>
+                                <th class="text-center">Date</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center w-24">Aksi</th>
+                                <th class="text-center w-24">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,9 +75,9 @@
                                             ];
                                             $labels = [
                                                 'DRAFT' => 'Draft',
-                                                'SUBMITTED' => 'Diajukan',
-                                                'VERIFIED' => 'Diterima',
-                                                'REJECTED' => 'Ditolak',
+                                                'SUBMITTED' => 'Submitted',
+                                                'VERIFIED' => 'Verified',
+                                                'REJECTED' => 'Rejected',
                                             ];
                                         @endphp
                                         <div class="badge {{ $badges[$item->status] ?? 'badge-ghost' }} gap-1">
@@ -102,7 +102,7 @@
                             @empty
                                 <tr>
                                     <td colspan="6" class="text-center py-8 text-base-content/60">
-                                        Belum ada data pengabdian.
+                                        There is no community service data yet.
                                     </td>
                                 </tr>
                             @endforelse

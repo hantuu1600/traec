@@ -96,8 +96,6 @@ class TeachingController extends Controller
         ]);
     }
 
-    // ...
-
     public function uploadEvidence(Request $request, int $id)
     {
         $teaching = $this->findOrFail($id);
@@ -159,7 +157,6 @@ class TeachingController extends Controller
             return back()->with('error', 'Harap unggah minimal satu bukti kegiatan sebelum mengirim.');
         }
 
-        // ... transaction ...
         DB::transaction(function () use ($id) {
             DB::table(self::TABLE)->where('id', $id)->update([
                 'status' => 'SUBMITTED',
@@ -169,7 +166,7 @@ class TeachingController extends Controller
             DB::table('activity_logs')->insert([
                 'user_id' => \Illuminate\Support\Facades\Auth::id(),
                 'action' => 'SUBMIT_TEACHING',
-                'entity_type' => 'Teaching', // Logs usually keep flexible entity_type
+                'entity_type' => 'Teaching',
                 'entity_id' => $id,
                 'description' => 'Mengirim kegiatan pengajaran untuk verifikasi.',
                 'created_at' => now(),

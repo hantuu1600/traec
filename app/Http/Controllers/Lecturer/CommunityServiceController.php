@@ -11,11 +11,10 @@ use Illuminate\Validation\Rule;
 
 class CommunityServiceController extends Controller
 {
-    // Constants
     const EVIDENCE_TABLE = 'activity_evidence';
     const ACTIVITY_TABLE = 'community_service_activities';
     const MEMBER_TABLE = 'community_service_members';
-    const CATEGORY = 'COMMUNITY_SERVICE'; // For evidence
+    const CATEGORY = 'COMMUNITY_SERVICE';
 
     public function index(Request $request)
     {
@@ -103,7 +102,6 @@ class CommunityServiceController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // Save members
             if ($request->has('members')) {
                 foreach ($request->members as $member) {
                     $userId = $member['user_id'] ?? null;
@@ -138,7 +136,6 @@ class CommunityServiceController extends Controller
             ->where('community_service_activity_id', $id)
             ->get();
 
-        // Populate member names for internal users
         foreach ($members as $member) {
             if ($member->user_id) {
                 $user = DB::table('users')->where('id', $member->user_id)->first();
@@ -220,7 +217,6 @@ class CommunityServiceController extends Controller
                 'updated_at' => now(),
             ]);
 
-            // Sync Members: Delete all and re-insert (Simplest for MVP)
             DB::table(self::MEMBER_TABLE)->where('community_service_activity_id', $id)->delete();
 
             if ($request->has('members')) {
@@ -311,7 +307,7 @@ class CommunityServiceController extends Controller
             return back()->with('error', 'Kegiatan tidak dapat diajukan (Status: ' . $activity->status . ').');
         }
 
-        // Check availability of evidence
+        // check availability of evidence
         $evidenceCount = DB::table(self::EVIDENCE_TABLE)
             ->where('category', self::CATEGORY)
             ->where('activity_id', $id)
@@ -327,8 +323,7 @@ class CommunityServiceController extends Controller
             'updated_at' => now(),
         ]);
 
-        // Optional: Log submission
-        // ...
+        // Optional: Log submission later
 
         return back()->with('success', 'Kegiatan berhasil diajukan untuk verifikasi.');
     }

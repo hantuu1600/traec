@@ -11,8 +11,8 @@
 
             {{-- Heading --}}
             <div class="text-center space-y-3">
-                <h1 class="text-3xl font-extrabold text-secondary">Buat Akun Baru</h1>
-                <p class="text-sm text-secondary/70">Lengkapi data diri Anda untuk mulai bergabung di
+                <h1 class="text-3xl font-extrabold text-secondary">Create New Account</h1>
+                <p class="text-sm text-secondary/70">Complete your personal data to start joining
                     <strong>Tremic</strong>.</p>
             </div>
 
@@ -23,10 +23,10 @@
                 {{-- Name --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Nama Lengkap</span>
+                        <span class="label-text text-secondary font-medium">Full Name</span>
                     </label>
                     <input type="text" name="name" id="reg_name" value="{{ old('name') }}"
-                        placeholder="Contoh: Budi Santoso, M.Kom" minlength="3" required
+                        placeholder="Example: Budi Santoso, M.Kom" minlength="3" required
                         class="input input-bordered w-full @error('name') input-error @enderror">
                     @error('name')
                         <p class="text-sm text-error mt-1">{{ $message }}</p>
@@ -36,7 +36,7 @@
                 {{-- Email --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Email Institusi</span>
+                        <span class="label-text text-secondary font-medium">Institutional Email</span>
                     </label>
                     <input type="email" name="email" id="reg_email" value="{{ old('email') }}"
                         placeholder="dosen@widyatama.ac.id" required
@@ -51,7 +51,7 @@
                     <label class="label mb-1">
                         <span class="label-text text-secondary font-medium">Password</span>
                     </label>
-                    <input type="password" name="password" id="reg_password" placeholder="Minimal 8 karakter"
+                    <input type="password" name="password" id="reg_password" placeholder="Minimum 8 characters"
                         minlength="8" required
                         class="input input-bordered w-full @error('password') input-error @enderror">
                     @error('password')
@@ -65,7 +65,7 @@
                         <span class="label-text text-secondary font-medium">NIDN</span>
                     </label>
                     <input type="text" name="nidn" id="reg_nidn" value="{{ old('nidn') }}"
-                        placeholder="Contoh: 0412345678" pattern="[0-9]+" minlength="6" inputmode="numeric" required
+                        placeholder="Example: 0412345678" pattern="[0-9]+" minlength="6" inputmode="numeric" required
                         class="input input-bordered w-full @error('nidn') input-error @enderror">
                     @error('nidn')
                         <p class="text-sm text-error mt-1">{{ $message }}</p>
@@ -75,11 +75,11 @@
                 {{-- Prodi --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Program Studi</span>
+                        <span class="label-text text-secondary font-medium">Study program</span>
                     </label>
                     <select name="prodi" id="reg_prodi" required
                         class="select select-bordered w-full @error('prodi') select-error @enderror">
-                        <option value="" disabled selected>Pilih Program Studi</option>
+                        <option value="" disabled selected>Select Study Program</option>
                         @foreach(['Informatika', 'Sistem Informasi', 'Teknik Industri', 'Manajemen', 'Akuntansi', 'Desain Komunikasi Visual', 'Bahasa Inggris'] as $prodi)
                             <option value="{{ $prodi }}" {{ old('prodi') == $prodi ? 'selected' : '' }}>{{ $prodi }}</option>
                         @endforeach
@@ -92,11 +92,11 @@
                 {{-- Faculty --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Fakultas</span>
+                        <span class="label-text text-secondary font-medium">Faculty</span>
                     </label>
                     <select name="faculty" id="reg_faculty" required
                         class="select select-bordered w-full @error('faculty') select-error @enderror">
-                        <option value="" disabled selected>Pilih Fakultas</option>
+                        <option value="" disabled selected>Choose your faculty</option>
                         @foreach(['Fakultas Teknik', 'Fakultas Bisnis & Manajemen', 'Fakultas Ekonomi', 'Fakultas Seni & Desain', 'Fakultas Bahasa'] as $faculty)
                             <option value="{{ $faculty }}" {{ old('faculty') == $faculty ? 'selected' : '' }}>{{ $faculty }}
                             </option>
@@ -110,11 +110,11 @@
                 {{-- Position --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Jabatan Akademik</span>
+                        <span class="label-text text-secondary font-medium">Academic Position</span>
                     </label>
                     <select name="position" id="reg_position" required
                         class="select select-bordered w-full @error('position') select-error @enderror">
-                        <option value="" disabled selected>Pilih Jabatan</option>
+                        <option value="" disabled selected>Select Academic Position</option>
                         @foreach(['Dosen', 'Kaprodi', 'Sekprodi', 'Dekan', 'Wakil Dekan', 'Staff Pengajar', 'Peneliti'] as $position)
                             <option value="{{ $position }}" {{ old('position') == $position ? 'selected' : '' }}>
                                 {{ $position }}
@@ -129,10 +129,10 @@
                 {{-- Phone Number --}}
                 <div class="form-control">
                     <label class="label mb-1">
-                        <span class="label-text text-secondary font-medium">Nomor WhatsApp / HP</span>
+                        <span class="label-text text-secondary font-medium">WhatsApp / Phone Number</span>
                     </label>
                     <input type="tel" name="phonenumber" id="reg_phone" value="{{ old('phonenumber') }}"
-                        placeholder="Contoh: 08123456789" minlength="10" maxlength="15" required
+                        placeholder="Example: 08123456789" minlength="10" maxlength="15" required
                         class="input input-bordered w-full @error('phonenumber') input-error @enderror">
                     @error('phonenumber')
                         <p class="text-sm text-error mt-1">{{ $message }}</p>
@@ -141,14 +141,14 @@
 
                 {{-- Submit --}}
                 <button type="submit" class="btn btn-primary w-full text-white font-bold text-lg">
-                    Daftar Sekarang
+                    Register
                 </button>
 
                 {{-- Back to Login --}}
                 <div class="text-center pt-2">
                     <a href="{{ route('login') }}"
                         class="link link-secondary no-underline hover:underline text-sm font-medium">
-                        Sudah punya akun? <span class="text-primary">Login di sini</span>
+                        Already have an account? <span class="text-primary">Login here</span>
                     </a>
                 </div>
             </form>

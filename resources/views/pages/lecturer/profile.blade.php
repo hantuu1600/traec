@@ -3,8 +3,8 @@
 @section('content')
     <div class="container mx-auto max-w-4xl py-6">
         <div class="flex flex-col gap-2 mb-8">
-            <h1 class="text-3xl font-bold text-secondary">Profil Dosen</h1>
-            <p class="text-base-content/60">Kelola informasi pribadi dan data akademik Anda.</p>
+            <h1 class="text-3xl font-bold text-secondary">Lecturer Profile</h1>
+            <p class="text-base-content/60">Manage your personal and academic information.</p>
         </div>
 
         @if (session('success'))
@@ -39,7 +39,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
-                            Ganti Password
+                            Change Password
                         </a>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
             <div class="md:col-span-2">
                 <div class="card bg-base-100 shadow-xl border border-base-200">
                     <div class="card-body">
-                        <h3 class="card-title text-lg mb-4">Edit Informasi</h3>
+                        <h3 class="card-title text-lg mb-4">Edit Information</h3>
 
                         <form action="{{ route('lecturer.profile.update') }}" method="POST">
                             @csrf
@@ -59,7 +59,7 @@
                                 {{-- Nama Lengkap --}}
                                 <div class="form-control md:col-span-2">
                                     <label class="label">
-                                        <span class="label-text font-medium">Nama Lengkap (dengan Gelar)</span>
+                                        <span class="label-text font-medium">Full Name (with Degree)</span>
                                     </label>
                                     <input type="text" name="name" value="{{ old('name', $user->name) }}"
                                         class="input input-bordered w-full @error('name') input-error @enderror" required />
@@ -79,7 +79,7 @@
                                 {{-- No HP --}}
                                 <div class="form-control">
                                     <label class="label">
-                                        <span class="label-text font-medium">Nomor WhatsApp</span>
+                                        <span class="label-text font-medium">WhatsApp Number</span>
                                     </label>
                                     <input type="text" name="phonenumber"
                                         value="{{ old('phonenumber', $user->phonenumber) }}"
@@ -92,7 +92,7 @@
                                 {{-- Email --}}
                                 <div class="form-control md:col-span-2">
                                     <label class="label">
-                                        <span class="label-text font-medium">Email Institusi</span>
+                                        <span class="label-text font-medium">Institution Email</span>
                                     </label>
                                     <input type="email" name="email" value="{{ old('email', $user->email) }}"
                                         class="input input-bordered w-full @error('email') input-error @enderror"
@@ -105,7 +105,7 @@
                                 {{-- Jabatan Fungsional --}}
                                 <div class="form-control">
                                     <label class="label">
-                                        <span class="label-text font-medium">Jabatan Fungsional</span>
+                                        <span class="label-text font-medium">Functional Position</span>
                                     </label>
                                     <select name="position" class="select select-bordered w-full">
                                         <option value="Asisten Ahli" {{ old('position', $user->position) == 'Asisten Ahli' ? 'selected' : '' }}>Asisten Ahli</option>
@@ -119,10 +119,10 @@
                                 {{-- Prodi --}}
                                 <div class="form-control">
                                     <label class="label">
-                                        <span class="label-text font-medium">Program Studi</span>
+                                        <span class="label-text font-medium">Study Program</span>
                                     </label>
                                     <select name="prodi" class="select select-bordered w-full" required>
-                                        <option value="" disabled>Pilih Program Studi</option>
+                                        <option value="" disabled>Select Study Program</option>
                                         @foreach($prodis as $prodi)
                                             <option value="{{ $prodi }}" {{ old('prodi', $user->prodi) == $prodi ? 'selected' : '' }}>
                                                 {{ $prodi }}
@@ -134,10 +134,10 @@
                                 {{-- Fakultas --}}
                                 <div class="form-control md:col-span-2">
                                     <label class="label">
-                                        <span class="label-text font-medium">Fakultas</span>
+                                        <span class="label-text font-medium">Faculty</span>
                                     </label>
                                     <select name="faculty" class="select select-bordered w-full" required>
-                                        <option value="" disabled>Pilih Fakultas</option>
+                                        <option value="" disabled>Select Faculty</option>
                                         @foreach($faculties as $faculty)
                                             <option value="{{ $faculty }}" {{ old('faculty', $user->faculty) == $faculty ? 'selected' : '' }}>
                                                 {{ $faculty }}
@@ -149,7 +149,7 @@
 
                             <div class="form-control mt-8">
                                 <button type="submit" class="btn btn-primary w-full md:w-auto md:self-end px-8">
-                                    Simpan Perubahan
+                                    Save Change
                                 </button>
                             </div>
                         </form>

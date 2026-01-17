@@ -4,10 +4,10 @@
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         <div class="flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-bold text-base-content">Kelola Periode</h1>
-                <p class="text-sm text-base-content/60">Atur periode pelaporan aktif.</p>
+                <h1 class="text-3xl font-bold text-base-content">Manage Period</h1>
+                <p class="text-sm text-base-content/60">Manage active reporting periods.</p>
             </div>
-            <a href="{{ route('admin.periods.create') }}" class="btn btn-primary">+ Tambah Periode</a>
+            <a href="{{ route('admin.periods.create') }}" class="btn btn-primary">+ Add Period</a>
         </div>
 
         <div class="card bg-base-100 border border-base-300">
@@ -15,11 +15,11 @@
                 <table class="table table-zebra w-full">
                     <thead>
                         <tr class="bg-base-200">
-                            <th>Nama Periode</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Tanggal Selesai</th>
+                            <th>Period Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
                                     @else
                                         <form action="{{ route('admin.periods.activate', $period->id) }}" method="POST">
                                             @csrf @method('PUT')
-                                            <button class="btn btn-xs btn-outline">Aktifkan</button>
+                                            <button class="btn btn-xs btn-outline">Activate</button>
                                         </form>
                                     @endif
                                 </td>
@@ -51,9 +51,9 @@
                                             class="btn btn-xs join-item">Edit</a>
                                         @if(!$period->is_active)
                                             <form action="{{ route('admin.periods.destroy', $period->id) }}" method="POST"
-                                                onsubmit="return confirm('Hapus periode ini?')">
+                                                onsubmit="return confirm('Delete this period?')">
                                                 @csrf @method('DELETE')
-                                                <button class="btn btn-xs btn-error join-item">Hapus</button>
+                                                <button class="btn btn-xs btn-error join-item">Delete</button>
                                             </form>
                                         @endif
                                     </div>
@@ -61,7 +61,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-4 opacity-50">Belum ada data periode.</td>
+                                <td colspan="5" class="text-center py-4 opacity-50">No period data available.</td>
                             </tr>
                         @endforelse
                     </tbody>

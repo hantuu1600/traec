@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-    /**
-     * Cek otorisasi user (default true dulu).
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Rule validasi untuk semua input login.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -27,11 +19,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * Pesan error custom biar lebih enak dibaca user.
-     *
-     * @return array<string, string>
-     */
     public function messages(): array
     {
         return [

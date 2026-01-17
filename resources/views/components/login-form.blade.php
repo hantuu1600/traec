@@ -21,7 +21,7 @@
                 </h1>
 
                 <p class="text-sm text-secondary/70">
-                    Silakan masuk menggunakan Email atau NIDN Anda.
+                    Please log in using your Email or NIDN.
                 </p>
             </div>
 
@@ -69,27 +69,27 @@
                 <div class="flex items-center justify-between text-sm">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" name="remember" class="checkbox checkbox-sm checkbox-primary">
-                        <span class="text-secondary">Ingat saya</span>
+                        <span class="text-secondary">Remember me</span>
                     </label>
 
                     <a href="#" class="text-primary hover:underline font-medium">
-                        Lupa password?
+                        Forgot password?
                     </a>
                 </div>
 
                 {{-- Action buttons --}}
                 <div class="space-y-2 pt-3">
                     <button type="submit" class="btn btn-primary w-full text-white font-bold text-lg">
-                        Masuk Aplikasi
+                        Log In
                     </button>
                     <br>
                     <div class="text-center">
                         <p class="text-sm text-secondary/70 inline-block">
-                            Belum punya akun?
+                            Don't have an account?
                         </p>
                         <a href="{{ route('register') }}"
                             class="link link-secondary no-underline hover:underline text-sm font-medium ml-1">
-                            Daftar Sekarang
+                            Register Now
                         </a>
                     </div>
                 </div>

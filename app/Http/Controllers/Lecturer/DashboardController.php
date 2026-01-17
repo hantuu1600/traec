@@ -10,7 +10,6 @@ class DashboardController extends Controller
     {
         $userId = \Illuminate\Support\Facades\Auth::id();
 
-        // 1. Hitung Statistik (Punya user doang)
         $teaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
             ->select('status', \Illuminate\Support\Facades\DB::raw("'Teaching' as type"))
             ->where('user_id', $userId)
@@ -26,17 +25,16 @@ class DashboardController extends Controller
         $total = $allActivities->count();
         $teachingCount = $allActivities->where('type', 'Teaching')->count();
         $researchCount = $allActivities->where('type', 'Research')->count();
-        // Untuk lecturer mungkin lebih relevan verified count nya
         $verifiedCount = $allActivities->where('status', 'VERIFIED')->count();
 
         $stats = [
-            ['label' => 'Total Kegiatan', 'value' => $total, 'icon' => 'total'],
-            ['label' => 'Pengajaran', 'value' => $teachingCount, 'icon' => 'teaching'],
-            ['label' => 'Penelitian', 'value' => $researchCount, 'icon' => 'research'],
-            ['label' => 'Terverifikasi', 'value' => $verifiedCount, 'icon' => 'verified'],
+            ['label' => 'Total Activities', 'value' => 0, 'icon' => 'total'],
+            ['label' => 'Teaching', 'value' => 0, 'icon' => 'teaching'],
+            ['label' => 'Research', 'value' => 0, 'icon' => 'research'],
+            ['label' => 'Verified', 'value' => 0, 'icon' => 'verified'],
         ];
 
-        // 2. Ambil Recent Activities User
+
         $recentTeaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
             ->select([
                 'id',
@@ -67,10 +65,9 @@ class DashboardController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate(10)
             ->through(function ($item) {
-                // Format data buat view (component x-activity-table-lecturer)
                 return [
                     'category' => $item->category,
-                    'lecturer' => \Illuminate\Support\Facades\Auth::user()->name, // Nama sendiri
+                    'lecturer' => \Illuminate\Support\Facades\Auth::user()->name,
                     'title' => $item->title,
                     'period' => $item->period,
                     'date' => \Carbon\Carbon::parse($item->created_at)->format('d M Y'),

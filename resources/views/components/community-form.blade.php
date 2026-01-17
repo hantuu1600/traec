@@ -13,34 +13,34 @@
         {{-- Title --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Judul Kegiatan</span>
+                <span class="label-text font-medium">Service Activity Title</span>
             </label>
             <input type="text" name="title" class="input input-bordered w-full"
-                value="{{ old('title', $activity->title) }}" required placeholder="Nama kegiatan pengabdian">
+                value="{{ old('title', $activity->title) }}" required placeholder="Name of service activity">
         </div>
 
         {{-- Partner --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Mitra Sasaran</span>
+                <span class="label-text font-medium">Target Partner</span>
             </label>
             <input type="text" name="partner" class="input input-bordered w-full"
-                value="{{ old('partner', $activity->partner) }}" placeholder="Nama mitra / kelompok sasaran">
+                value="{{ old('partner', $activity->partner) }}" placeholder="Name of partner/target group">
         </div>
 
         {{-- Location --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Lokasi</span>
+                <span class="label-text font-medium">Location</span>
             </label>
             <input type="text" name="location" class="input input-bordered w-full"
-                value="{{ old('location', $activity->location) }}" placeholder="Tempat pelaksanaan">
+                value="{{ old('location', $activity->location) }}" placeholder="Place of implementation">
         </div>
 
         {{-- Date Start --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Tanggal Mulai</span>
+                <span class="label-text font-medium">Start Date</span>
             </label>
             <input type="date" name="start_date" class="input input-bordered w-full"
                 value="{{ old('start_date', $activity->start_date) }}">
@@ -49,7 +49,7 @@
         {{-- Date End --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Tanggal Selesai</span>
+                <span class="label-text font-medium">End Date</span>
             </label>
             <input type="date" name="end_date" class="input input-bordered w-full"
                 value="{{ old('end_date', $activity->end_date) }}">
@@ -58,19 +58,19 @@
         {{-- Role --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Peran</span>
+                <span class="label-text font-medium">Role</span>
             </label>
             <input type="text" name="role" class="input input-bordered w-full"
-                value="{{ old('role', $activity->role) }}" placeholder="Ketua / Anggota / Narasumber">
+                value="{{ old('role', $activity->role) }}" placeholder="Leader / Member / Speaker">
         </div>
 
         {{-- Members Section --}}
         <div class="md:col-span-2 space-y-3 pt-4 border-t border-base-200">
             <div class="flex items-center justify-between gap-3">
-                <h3 class="text-md font-semibold text-secondary">Anggota Tim</h3>
+                <h3 class="text-md font-semibold text-secondary">Team Members</h3>
 
                 <button type="button" id="add-member-btn" class="btn btn-sm btn-outline btn-primary">
-                    + Tambah Anggota
+                    + Add Member
                 </button>
             </div>
 
@@ -78,17 +78,17 @@
                 <table class="table table-sm bg-base-100">
                     <thead>
                         <tr>
-                            <th class="w-32">Tipe</th>
-                            <th>Nama Anggota</th>
-                            <th>Peran</th>
-                            <th class="text-center w-20">Aksi</th>
+                            <th class="w-32">Type</th>
+                            <th>Member Name</th>
+                            <th>Role</th>
+                            <th class="text-center w-20">Action</th>
                         </tr>
                     </thead>
                     <tbody id="members-table-body"></tbody>
                 </table>
             </div>
             <p class="text-sm text-base-content/60">
-                Tambahkan dosen (Internal) atau mahasiswa/pihak luar (Eksternal).
+                Add internal staff (Internal) or external students/partners (External).
             </p>
         </div>
     </div>

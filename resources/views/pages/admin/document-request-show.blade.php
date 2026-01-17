@@ -1,16 +1,16 @@
-@extends('layouts.dashboard-admin-layout', ['title' => $title ?? 'Detail Verifikasi'])
+@extends('layouts.dashboard-admin-layout', ['title' => $title ?? 'Verification Detail'])
 
 @section('content')
   <div class="w-full max-w-5xl space-y-6">
 
     <div class="flex items-start justify-between gap-4">
       <div>
-        <h1 class="text-xl font-semibold text-secondary">Detail Verifikasi</h1>
-        <p class="text-sm text-base-content/60">Tinjau pengajuan dokumen dosen</p>
+        <h1 class="text-xl font-semibold text-secondary">Verification Detail</h1>
+        <p class="text-sm text-base-content/60">Review lecturer document submissions</p>
       </div>
 
       <a href="{{ route('admin.document-request.index') }}" class="btn btn-ghost btn-sm">
-        Kembali
+        Back
       </a>
     </div>
 
@@ -21,11 +21,11 @@
         {{-- Lecturer Info --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm border-b border-base-200 pb-4">
           <div>
-            <div class="font-medium text-secondary">Nama Dosen</div>
+            <div class="font-medium text-secondary">Lecturer Name</div>
             <div class="text-lg font-bold text-base-content/80">{{ $activity->lecturer_name ?? '-' }}</div>
           </div>
           <div>
-            <div class="font-medium text-secondary">Program Studi</div>
+            <div class="font-medium text-secondary">Study program</div>
             <div class="text-base text-base-content/80">{{ $activity->lecturer_prodi ?? '-' }}</div>
           </div>
           <div class="md:col-span-2">
@@ -39,7 +39,7 @@
 
           @if($category === 'TEACHING')
             <div class="md:col-span-2">
-              <div class="font-medium text-secondary">Mata Kuliah</div>
+              <div class="font-medium text-secondary">Course Name</div>
               <div class="text-xl font-semibold text-base-content">{{ $activity->course_name }}</div>
             </div>
             <div>
@@ -47,32 +47,32 @@
               <div>{{ $activity->semester }}</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">Tahun Ajar</div>
+              <div class="font-medium text-secondary">Academic Year</div>
               <div>{{ $activity->year }}</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">SKS</div>
+              <div class="font-medium text-secondary">Credits (SKS)</div>
               <div>{{ $activity->credits }} SKS</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">Total Pertemuan</div>
-              <div>{{ $activity->meetings_total }} Pertemuan</div>
+              <div class="font-medium text-secondary">Total Meetings</div>
+              <div>{{ $activity->meetings_total }} Meetings</div>
             </div>
           @elseif($category === 'RESEARCH')
             <div class="md:col-span-2">
-              <div class="font-medium text-secondary">Judul Penelitian</div>
+              <div class="font-medium text-secondary">Research Title</div>
               <div class="text-xl font-semibold text-base-content">{{ $activity->title }}</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">Peran</div>
+              <div class="font-medium text-secondary">Role</div>
               <div>{{ $activity->role }}</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">Tahun</div>
+              <div class="font-medium text-secondary">Year</div>
               <div>{{ $activity->year }}</div>
             </div>
             <div>
-              <div class="font-medium text-secondary">Penerbit (Publisher)</div>
+              <div class="font-medium text-secondary">Publisher</div>
               <div>{{ $activity->publisher ?? '-' }}</div>
             </div>
             <div class="md:col-span-2">
@@ -89,20 +89,20 @@
           @endif
 
           <div class="md:col-span-2 pt-2">
-            <div class="font-medium text-secondary mb-1">Status Pengajuan</div>
+            <div class="font-medium text-secondary mb-1">Submission Status</div>
             @if($activity->status == 'VERIFIED')
-              <span class="badge badge-success text-white">TERVERIFIKASI</span>
+              <span class="badge badge-success text-white">VERIFIED</span>
             @elseif($activity->status == 'REJECTED')
-              <span class="badge badge-error text-white">DITOLAK</span>
+              <span class="badge badge-error text-white">REJECTED</span>
             @elseif($activity->status == 'SUBMITTED')
-              <span class="badge badge-warning text-white">MENUNGGU VERIFIKASI</span>
+              <span class="badge badge-warning text-white">PENDING VERIFICATION</span>
             @else
               <span class="badge badge-ghost">{{ $activity->status }}</span>
             @endif
           </div>
 
           <div class="md:col-span-2">
-            <div class="font-medium text-secondary">Terakhir Diupdate</div>
+            <div class="font-medium text-secondary">Last Updated</div>
             <div class="text-base-content/80">
               {{ \Carbon\Carbon::parse($activity->updated_at)->translatedFormat('d F Y H:i') }}
             </div>
@@ -117,7 +117,7 @@
     <div class="card bg-base-100 border border-base-300">
       <div class="card-body">
         <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-secondary">Bukti Pendukung</h3>
+          <h3 class="font-semibold text-secondary">Supporting Evidence</h3>
           <span class="text-sm text-base-content/60">
             {{ count($evidences) }} file
           </span>
@@ -136,7 +136,7 @@
                   </svg>
                 </div>
                 <div>
-                  <div class="font-medium">{{ $e->filename ?? 'File Bukti' }}</div>
+                  <div class="font-medium">{{ $e->filename ?? 'Supporting Evidence File' }}</div>
                   <div class="text-xs text-base-content/60">{{ $e->description ?? '-' }}</div>
                 </div>
               </div>
@@ -151,7 +151,7 @@
               </a>
             </div>
           @empty
-            <p class="text-sm text-base-content/60 italic text-center py-4">Belum ada bukti yang diunggah.</p>
+            <p class="text-sm text-base-content/60 italic text-center py-4">No supporting evidence uploaded yet.</p>
           @endforelse
         </div>
       </div>
@@ -162,20 +162,19 @@
       @if(in_array($activity->status, ['SUBMITTED', 'PENDING']))
         <form method="POST"
           action="{{ route('admin.document-request.approve', ['category' => strtolower($category), 'id' => $activity->id]) }}"
-          onsubmit="return confirm('Apakah Anda yakin ingin memverifikasi dokumen ini?');">
+          onsubmit="return confirm('Are you sure you want to verify this document?');">
           @csrf
           @method('PUT')
           <button class="btn btn-success text-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12" />
-            </svg>
-            Verifikasi Dokumen
+            </svg>Document Verification Detail
           </button>
         </form>
 
         <button class="btn btn-outline btn-error" onclick="rejectModal.showModal()">
-          Tolak Dokumen
+          Reject Document
         </button>
       @endif
     </div>
@@ -185,8 +184,8 @@
   {{-- Reject Modal --}}
   <dialog id="rejectModal" class="modal">
     <div class="modal-box">
-      <h3 class="font-bold text-lg text-error">Tolak Dokumen</h3>
-      <p class="text-sm text-base-content/60 mt-1">Mohon berikan alasan penolakan agar dosen dapat memperbaikinya.</p>
+      <h3 class="font-bold text-lg text-error">Reject Document</h3>
+      <p class="text-sm text-base-content/60 mt-1">Please provide a reason for rejection so the lecturer can correct it.</p>
 
       <form method="POST"
         action="{{ route('admin.document-request.reject', ['category' => strtolower($category), 'id' => $activity->id]) }}"
@@ -198,13 +197,13 @@
           placeholder="Tuliskan alasan penolakan di sini..."></textarea>
 
         <div class="modal-action">
-          <button type="button" class="btn btn-ghost" onclick="rejectModal.close()">Batal</button>
-          <button type="submit" class="btn btn-error text-white">Kirim Penolakan</button>
+          <button type="button" class="btn btn-ghost" onclick="rejectModal.close()">Cancel</button>
+          <button type="submit" class="btn btn-error text-white">Send Rejection</button>
         </div>
       </form>
     </div>
     <form method="dialog" class="modal-backdrop">
-      <button>close</button>
+      <button>Close</button>
     </form>
   </dialog>
 @endsection

@@ -4,9 +4,9 @@
     <div class="max-w-2xl mx-auto">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.lecturers.index') }}" class="btn btn-ghost btn-sm">
-                &larr; Kembali
+                &larr; Back
             </a>
-            <h1 class="text-2xl font-bold">Tambah Dosen Baru</h1>
+            <h1 class="text-2xl font-bold">Add New Lecturer</h1>
         </div>
 
         <div class="card bg-base-100 shadow-md border border-base-300">
@@ -16,8 +16,8 @@
 
                     {{-- Nama --}}
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-semibold">Nama Lengkap</span></label>
-                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan nama lengkap"
+                        <label class="label"><span class="label-text font-semibold">Full Name</span></label>
+                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter full name"
                             class="input input-bordered w-full" required />
                     </div>
 
@@ -25,12 +25,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label"><span class="label-text font-semibold">NIDN</span></label>
-                            <input type="text" name="nidn" value="{{ old('nidn') }}" placeholder="Nomor Induk Dosen"
+                            <input type="text" name="nidn" value="{{ old('nidn') }}" placeholder="Enter NIDN"
                                 class="input input-bordered w-full" required />
                         </div>
                         <div class="form-control">
-                            <label class="label"><span class="label-text font-semibold">Program Studi</span></label>
-                            <input type="text" name="prodi" value="{{ old('prodi') }}" placeholder="Contoh: Informatika"
+                            <label class="label"><span class="label-text font-semibold">Study Program</span></label>
+                            <input type="text" name="prodi" value="{{ old('prodi') }}" placeholder="Example: Informatika"
                                 class="input input-bordered w-full" required />
                         </div>
                     </div>
@@ -38,19 +38,19 @@
                     {{-- Email --}}
                     <div class="form-control">
                         <label class="label"><span class="label-text font-semibold">Email</span></label>
-                        <input type="email" name="email" value="{{ old('email') }}" placeholder="email@kampus.ac.id"
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="email@widyatama.ac.id"
                             class="input input-bordered w-full" required />
                     </div>
 
                     {{-- Password --}}
                     <div class="form-control">
                         <label class="label"><span class="label-text font-semibold">Password</span></label>
-                        <input type="password" name="password" placeholder="Minimal 6 karakter"
+                        <input type="password" name="password" placeholder="Minimum 6 characters"
                             class="input input-bordered w-full" required />
                     </div>
 
                     <div class="card-actions justify-end mt-6">
-                        <button type="submit" class="btn btn-primary text-white w-full md:w-auto">Simpan Data</button>
+                        <button type="submit" class="btn btn-primary text-white w-full md:w-auto">Save Data</button>
                     </div>
                 </div>
             </form>

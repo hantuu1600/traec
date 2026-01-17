@@ -6,8 +6,8 @@
     <div class="bg-base-100 border border-base-300 rounded-2xl shadow-sm overflow-hidden">
     <div class="p-4 flex items-center justify-between gap-3">
         <div>
-        <h2 class="text-lg font-bold text-base-content">Daftar Aktivitas</h2>
-        <p class="text-sm text-base-content/60">Pantau status kegiatan akademik Anda</p>
+        <h2 class="text-lg font-bold text-base-content">Activity List</h2>
+        <p class="text-sm text-base-content/60">Monitor your academic activity status</p>
         </div>
 
     </div>
@@ -16,14 +16,14 @@
         <table class="table">
         <thead>
             <tr class="text-base-content/70">
-            <th>Kategori</th>
-            <th>Dosen</th>
-            <th>Aktivitas</th>
-            <th>Periode</th>
-            <th>Tanggal</th>
+            <th>Category</th>
+            <th>Lecturer</th>
+            <th>Activity</th>
+            <th>Period</th>
+            <th>Date</th>
             <th>Status</th>
-            <th>Diperbarui</th>
-            <th class="text-center">Aksi</th>
+            <th>Updated</th>
+            <th class="text-center">Action</th>
             </tr>
         </thead>
 
@@ -83,7 +83,7 @@
             @empty
             <tr>
                 <td colspan="8" class="text-center py-10 text-base-content/60">
-                Belum ada aktivitas ditemukan.
+                No activities found.
                 </td>
             </tr>
             @endforelse

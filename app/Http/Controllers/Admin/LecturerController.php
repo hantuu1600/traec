@@ -17,7 +17,7 @@ class LecturerController extends Controller
         $q = trim((string) $request->query('q', ''));
 
         $query = DB::table(self::TABLE)
-            ->where('role', 'dosen') // Lecturer
+            ->where('role', 'dosen')
             ->whereNull('deleted_at')
             ->orderBy('name');
 

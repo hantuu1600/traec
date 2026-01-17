@@ -50,7 +50,7 @@
                                 d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <div>
-                            <h3 class="font-bold">Terjadi Kesalahan</h3>
+                            <h3 class="font-bold">There is an error</h3>
                             <ul class="list-disc list-inside text-sm">
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>

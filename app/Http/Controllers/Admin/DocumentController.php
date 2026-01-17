@@ -121,7 +121,7 @@ class DocumentController extends Controller
 
         return view('pages.admin.document-request-show', [
             'title' => 'Detail Verifikasi',
-            'category' => $category, // TEACHING / RESEARCH
+            'category' => $category,
             'activity' => $activity,
             'evidences' => $evidences,
         ]);

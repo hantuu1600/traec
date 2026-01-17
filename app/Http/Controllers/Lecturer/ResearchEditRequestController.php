@@ -38,7 +38,7 @@ class ResearchEditRequestController extends Controller
         if (!$research)
             abort(404);
 
-        // Log the request
+        // log request
         DB::table('activity_logs')->insert([
             'user_id' => Auth::id(),
             'action' => 'REQUEST_EDIT',

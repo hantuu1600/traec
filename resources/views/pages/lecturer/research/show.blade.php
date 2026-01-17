@@ -8,7 +8,7 @@
             <x-lecturer-page-header title="Detail Penelitian" description="Lihat detail lengkap data penelitian Anda." />
             <div class="flex gap-2">
                 <a href="{{ route('lecturer.research.index') }}" class="btn btn-ghost">
-                    Kembali
+                    Back
                 </a>
                 @if(in_array(strtoupper($research->status), ['DRAFT', 'REJECTED']))
                     <a href="{{ route('lecturer.research.edit', $research->id) }}" class="btn btn-outline btn-warning">
@@ -28,7 +28,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                     <div class="md:col-span-2">
-                        <div class="text-sm opacity-60">Judul Penelitian</div>
+                        <div class="text-sm opacity-60">Research Title</div>
                         <div class="font-semibold text-lg">{{ $research->title }}</div>
                     </div>
 

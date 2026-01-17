@@ -4,9 +4,9 @@
     <div class="max-w-2xl mx-auto">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.lecturers.index') }}" class="btn btn-ghost btn-sm">
-                &larr; Kembali
+                &larr; Back
             </a>
-            <h1 class="text-2xl font-bold">Edit Data Dosen</h1>
+            <h1 class="text-2xl font-bold">Edit Lecturer Data</h1>
         </div>
 
         <div class="card bg-base-100 shadow-md border border-base-300">
@@ -17,7 +17,7 @@
 
                     {{-- Nama --}}
                     <div class="form-control">
-                        <label class="label"><span class="label-text font-semibold">Nama Lengkap</span></label>
+                        <label class="label"><span class="label-text font-semibold">Full Name</span></label>
                         <input type="text" name="name" value="{{ old('name', $lecturer->name) }}"
                             class="input input-bordered w-full" required />
                     </div>
@@ -30,7 +30,7 @@
                                 class="input input-bordered w-full" required />
                         </div>
                         <div class="form-control">
-                            <label class="label"><span class="label-text font-semibold">Program Studi</span></label>
+                            <label class="label"><span class="label-text font-semibold">Study Program</span></label>
                             <input type="text" name="prodi" value="{{ old('prodi', $lecturer->prodi) }}"
                                 class="input input-bordered w-full" required />
                         </div>
@@ -46,15 +46,15 @@
                     {{-- Password --}}
                     <div class="form-control">
                         <label class="label">
-                            <span class="label-text font-semibold">Password Baru</span>
-                            <span class="label-text-alt text-gray-500">(Kosongkan jika tidak ingin mengubah)</span>
+                            <span class="label-text font-semibold">New Pasword</span>
+                            <span class="label-text-alt text-gray-500">(Leave blank if you don't want to change)</span>
                         </label>
                         <input type="password" name="password" placeholder="Minimal 6 karakter"
                             class="input input-bordered w-full" />
                     </div>
 
                     <div class="card-actions justify-end mt-6">
-                        <button type="submit" class="btn btn-primary text-white w-full md:w-auto">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-primary text-white w-full md:w-auto">Save Changes</button>
                     </div>
                 </div>
             </form>

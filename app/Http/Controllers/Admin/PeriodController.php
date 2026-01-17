@@ -49,7 +49,6 @@ class PeriodController extends Controller
             $isActive = $request->has('is_active');
 
             if ($isActive) {
-                // Deactivate others
                 DB::table(self::TABLE)->update(['is_active' => false]);
             }
 
@@ -92,12 +91,6 @@ class PeriodController extends Controller
 
         DB::beginTransaction();
         try {
-            // Handle activation logic via separate route usually, but here maybe during update?
-            // Let's assume standard update doesn't toggle active easily unless specific checkbox
-
-            // But usually activation is a significant event. 
-            // I'll stick to basic data update here.
-
             DB::table(self::TABLE)->where('id', $id)->update([
                 'name' => $request->name,
                 'start_date' => $request->start_date,
@@ -138,9 +131,6 @@ class PeriodController extends Controller
         if ($period && $period->is_active) {
             return back()->with('error', 'Tidak dapat menghapus periode yang sedang aktif.');
         }
-
-        // Also check if used? For now soft delete logic usually implies checking constraints.
-        // But table migration didn't specify soft deletes for periods (checked earlier).
         DB::table(self::TABLE)->delete($id);
         return back()->with('success', 'Periode berhasil dihapus.');
     }

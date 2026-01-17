@@ -11,7 +11,7 @@ class AdminManagementController extends Controller
 {
     public function index()
     {
-        // Get all users with role 'admin'
+        //get all users with role admin
         $admins = User::where('role', 'admin')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('pages.superadmin.admins.index', [
@@ -40,7 +40,6 @@ class AdminManagementController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'admin',
-            // Default nullable fields
             'nidn' => '-',
             'nip' => '-',
             'prodi' => '-',

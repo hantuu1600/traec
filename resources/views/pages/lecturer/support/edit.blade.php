@@ -11,8 +11,8 @@
         </div>
 
         <div class="flex justify-end gap-3 pt-4">
-            <a href="{{ route('lecturer.support.index') }}" class="btn btn-outline btn-secondary">Batal</a>
-            <button form="support-form" type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            <a href="{{ route('lecturer.support.index') }}" class="btn btn-outline btn-secondary">Cancel</a>
+            <button form="support-form" type="submit" class="btn btn-primary">Save Change</button>
         </div>
     </div>
 @endsection

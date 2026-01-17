@@ -13,26 +13,26 @@
         {{-- Type --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Jenis Kegiatan</span>
+                <span class="label-text font-medium">Type of activity</span>
             </label>
             <input type="text" name="type" class="input input-bordered w-full"
                 value="{{ old('type', $activity->type) }}" required
-                placeholder="Contoh: Panitia Seminar, Pengurus Organisasi Profesi">
+                placeholder="Example: Panitia Seminar, Pengurus Organisasi Profesi">
         </div>
 
         {{-- Role --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Peran / Jabatan</span>
+                <span class="label-text font-medium">Role / Position</span>
             </label>
             <input type="text" name="role" class="input input-bordered w-full"
-                value="{{ old('role', $activity->role) }}" required placeholder="Contoh: Anggota, Ketua">
+                value="{{ old('role', $activity->role) }}" required placeholder="Example: Anggota, Ketua">
         </div>
 
         {{-- Date --}}
         <div class="form-control">
             <label class="label pb-1">
-                <span class="label-text font-medium">Tanggal Pelaksanaan</span>
+                <span class="label-text font-medium">Implementation date</span>
             </label>
             <input type="date" name="activity_date" class="input input-bordered w-full"
                 value="{{ old('activity_date', $activity->activity_date) }}" required>
@@ -41,10 +41,10 @@
         {{-- Description --}}
         <div class="form-control md:col-span-2">
             <label class="label pb-1">
-                <span class="label-text font-medium">Deskripsi Kegiatan</span>
+                <span class="label-text font-medium">Activity Description</span>
             </label>
             <textarea name="description" class="textarea textarea-bordered h-24" required
-                placeholder="Jelaskan detail kegiatan...">{{ old('description', $activity->description) }}</textarea>
+                placeholder="Describe the details of the activity...">{{ old('description', $activity->description) }}</textarea>
         </div>
     </div>
 </form>

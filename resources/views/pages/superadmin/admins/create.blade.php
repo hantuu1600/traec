@@ -4,7 +4,7 @@
     <div class="w-full max-w-lg mx-auto py-6">
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body">
-                <h2 class="card-title mb-4">Tambah Admin Baru</h2>
+                <h2 class="card-title mb-4">Add new admin</h2>
                 <x-admin-form />
             </div>
         </div>

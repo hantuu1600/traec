@@ -30,26 +30,26 @@
             <div class="lg:col-span-2 space-y-6">
                 <div class="card bg-base-100 border border-base-300">
                     <div class="card-body">
-                        <h2 class="card-title text-lg border-b border-base-200 pb-2 mb-4">Informasi Kegiatan</h2>
+                        <h2 class="card-title text-lg border-b border-base-200 pb-2 mb-4">Activity Information</h2>
                         <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-4">
                             <div>
-                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Mitra Sasaran</dt>
+                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Target Partners</dt>
                                 <dd class="font-medium mt-1">{{ $activity->partner ?? '-' }}</dd>
                             </div>
                             <div>
-                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Lokasi</dt>
+                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Location</dt>
                                 <dd class="font-medium mt-1">{{ $activity->location ?? '-' }}</dd>
                             </div>
                             <div>
-                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Tanggal Mulai</dt>
+                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Start Date</dt>
                                 <dd class="font-medium mt-1">{{ $activity->start_date ? \Carbon\Carbon::parse($activity->start_date)->format('d M Y') : '-' }}</dd>
                             </div>
                             <div>
-                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Tanggal Selesai</dt>
+                                <dt class="text-xs text-base-content/60 uppercase font-semibold">End Date</dt>
                                 <dd class="font-medium mt-1">{{ $activity->end_date ? \Carbon\Carbon::parse($activity->end_date)->format('d M Y') : '-' }}</dd>
                             </div>
                             <div class="sm:col-span-2">
-                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Peran Anda</dt>
+                                <dt class="text-xs text-base-content/60 uppercase font-semibold">Your Role</dt>
                                 <dd class="font-medium mt-1">{{ $activity->role ?? '-' }}</dd>
                             </div>
                         </dl>
@@ -59,14 +59,14 @@
                 {{-- Members --}}
                 <div class="card bg-base-100 border border-base-300">
                     <div class="card-body">
-                        <h2 class="card-title text-lg border-b border-base-200 pb-2 mb-4">Anggota Tim</h2>
+                        <h2 class="card-title text-lg border-b border-base-200 pb-2 mb-4">Team Members</h2>
                         <div class="overflow-x-auto">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
-                                        <th>Peran</th>
-                                        <th>Keterangan</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,7 +91,7 @@
             <div class="space-y-6">
                  <div class="card bg-base-100 border border-base-300">
                     <div class="card-body">
-                        <h2 class="card-title text-lg mb-4">Bukti Pendukung</h2>
+                        <h2 class="card-title text-lg mb-4">Supporting Evidence</h2>
                         
                         {{-- List Evidence --}}
                         <div class="space-y-3 mb-6">
@@ -120,7 +120,7 @@
                                 </div>
                             @empty
                                 <div class="text-center py-6 text-sm text-base-content/50 border-2 border-dashed border-base-200 rounded-box">
-                                    Belum ada bukti diunggah.
+                                    No evidence has been uploaded yet.
                                 </div>
                             @endforelse
                         </div>
@@ -138,33 +138,33 @@
                 {{-- Action Card --}}
                 <div class="card bg-base-100 border border-base-300">
                     <div class="card-body">
-                         <h2 class="card-title text-lg mb-2">Aksi</h2>
+                         <h2 class="card-title text-lg mb-2">Action</h2>
                          
                          @if($activity->status == 'DRAFT')
-                             <p class="text-sm text-base-content/60 mb-4">Pastikan data dan bukti sudah lengkap sebelum mengajukan verifikasi.</p>
+                             <p class="text-sm text-base-content/60 mb-4">Make sure the data and evidence are complete before submitting verification.</p>
                              <form action="{{ route('lecturer.community-service.submit', $activity->id) }}" method="POST">
                                  @csrf
                                  <button type="submit" class="btn btn-primary w-full" {{ $evidences->isEmpty() ? 'disabled' : '' }}>
-                                     Ajukan Verifikasi
+                                     Submit Verification
                                  </button>
                              </form>
                          @elseif($activity->status == 'REJECTED')
                              <div class="alert alert-error text-xs mb-4">
-                                 <span>Ditolak. Silakan perbaiki dan ajukan ulang.</span>
+                                 <span>Rejected. Please fix and submit again.</span>
                              </div>
                              <form action="{{ route('lecturer.community-service.submit', $activity->id) }}" method="POST">
                                  @csrf
                                  <button type="submit" class="btn btn-primary w-full" {{ $evidences->isEmpty() ? 'disabled' : '' }}>
-                                     Ajukan Ulang
+                                     Submit Again
                                  </button>
                              </form>
                          @elseif($activity->status == 'SUBMITTED')
                              <div class="alert alert-info text-xs">
-                                 <span>Menunggu verifikasi admin.</span>
+                                 <span>Waiting for admin verification.</span>
                              </div>
                          @elseif($activity->status == 'VERIFIED')
                               <div class="alert alert-success text-xs">
-                                 <span>Data telah diverifikasi.</span>
+                                 <span>Data has been verified.</span>
                              </div>
                          @endif
                     </div>
@@ -176,7 +176,7 @@
     {{-- Upload Modal --}}
     <dialog id="upload_modal" class="modal">
         <div class="modal-box">
-            <h3 class="font-bold text-lg">Unggah Bukti Kegiatan</h3>
+            <h3 class="font-bold text-lg">Upload Supporting Evidence</h3>
             <p class="py-2 text-sm text-base-content/70">Format: PDF, JPG, PNG (Max 2MB)</p>
             
             <form action="{{ route('lecturer.community-service.evidence.upload', $activity->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4 mt-4">
@@ -185,12 +185,12 @@
                     <input type="file" name="evidence_file" class="file-input file-input-bordered w-full" required />
                 </div>
                 <div class="form-control">
-                    <label class="label"><span class="label-text">Keterangan (Opsional)</span></label>
-                    <input type="text" name="description" class="input input-bordered w-full" placeholder="Contoh: Laporan Akhir" />
+                    <label class="label"><span class="label-text">Description (Optional)</span></label>
+                    <input type="text" name="description" class="input input-bordered w-full" placeholder="Example: Final Report" />
                 </div>
                 <div class="modal-action">
-                    <button type="button" class="btn" onclick="upload_modal.close()">Batal</button>
-                    <button type="submit" class="btn btn-primary">Unggah</button>
+                    <button type="button" class="btn" onclick="upload_modal.close()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </div>
             </form>
         </div>

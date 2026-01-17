@@ -3,23 +3,22 @@
 @section('content')
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
 
-        <x-lecturer-page-header title="Tambah Kegiatan Penelitian"
-            description="Tambahkan data penelitian atau publikasi baru Anda." />
+        <x-lecturer-page-header title="Add Research Activities"
+            description="Add your new research data or publications." />
 
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body p-4 lg:p-6 space-y-6">
-                <!-- Use the shared component, passing the empty $research object -->
                 <x-research-form :research="$research" />
             </div>
         </div>
 
         <div class="flex justify-end gap-3 pt-4">
             <a href="{{ route('lecturer.research.index') }}" class="btn btn-outline btn-secondary">
-                Batal
+                Cancel
             </a>
 
             <button form="research-form" type="submit" class="btn btn-primary">
-                Simpan Penelitian
+                Save Research
             </button>
         </div>
 
@@ -50,14 +49,12 @@
                 const row = document.createElement('tr');
                 const i = memberIndex;
 
-                // Determine initial values
-                let isInternal = true; // default
+                let isInternal = true;
                 let userId = '';
                 let name = '';
                 let role = '';
 
                 if (data) {
-                    // Existing member
                     userId = data.user_id || '';
                     name = data.name || '';
                     role = data.role || '';
@@ -69,8 +66,8 @@
                 row.innerHTML = `
                     <td>
                         <select class="select select-bordered select-sm w-full mb-1 member-type-select">
-                            <option value="internal" ${isInternal ? 'selected' : ''}>Dosen (Internal)</option>
-                            <option value="external" ${!isInternal ? 'selected' : ''}>Eksternal / Mahasiswa</option>
+                            <option value="internal" ${isInternal ? 'selected' : ''}>Lecturer (Internal)</option>
+                            <option value="external" ${!isInternal ? 'selected' : ''}>Eksternal / Student</option>
                         </select>
                     </td>
                     <td>
@@ -83,18 +80,18 @@
                             <input type="text" name="members[${i}][name]" 
                                    value="${name}"
                                    class="input input-bordered input-sm w-full external-input ${isInternal ? 'hidden' : ''}" 
-                                   placeholder="Nama Lengkap" ${isInternal ? 'disabled' : ''}>
+                                   placeholder="Full Name" ${isInternal ? 'disabled' : ''}>
                         </div>
                     </td>
                     <td>
                         <input type="text" name="members[${i}][role]"
                                value="${role}"
                                class="input input-bordered input-sm w-full"
-                               placeholder="Penulis / Anggota">
+                               placeholder="Author / Member">
                     </td>
                     <td class="text-center">
                         <button type="button" class="btn btn-xs btn-outline btn-error remove-member-btn">
-                            Hapus
+                            Delete
                         </button>
                     </td>
                     `;
@@ -126,20 +123,18 @@
             // Bind Add Button
             addBtn?.addEventListener('click', () => addRow());
 
-            // Bind Remove Button (Delegation)
+            // Bind Remove Button
             tableBody?.addEventListener('click', (e) => {
                 if (e.target && e.target.classList.contains('remove-member-btn')) {
                     e.target.closest('tr')?.remove();
                 }
             });
 
-            // Populate Check
             if (existingMembers && existingMembers.length > 0) {
                 existingMembers.forEach(member => {
                     addRow(member);
                 });
             } else {
-                // Determine logic for new form: maybe 1 empty row?
                 // addRow(); // Optional: Auto-add first row
             }
         });

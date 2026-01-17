@@ -5,7 +5,7 @@
 
         <div>
             <h1 class="text-2xl font-semibold">Period Submission Status</h1>
-            <p class="text-sm opacity-70">Pantau status pengajuan periode aktif.</p>
+            <p class="text-sm opacity-70">Monitor the status of active period applications.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -26,10 +26,10 @@
 
                     <div class="mt-4 space-y-2">
                         <a href="{{ route('lecturer.teaching.index') }}" class="btn btn-outline w-full">
-                            Lengkapi Aktivitas
+                            Complete Activities
                         </a>
                         <a href="{{ route('lecturer.submissions.index') }}" class="btn btn-ghost w-full">
-                            Riwayat Pengajuan
+                            Submission History
                         </a>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <h2 class="font-semibold">Progress</h2>
-                            <p class="text-sm opacity-70">Ikuti tahapan berikut</p>
+                            <p class="text-sm opacity-70">Follow the steps below</p>
                         </div>
 
                         <div class="flex gap-2">
@@ -53,18 +53,18 @@
 
                     <ul class="steps steps-vertical">
                         <li class="step step-primary">
-                            Lengkapi seluruh aktivitas
+                            Complete all activities
                         </li>
                         <li class="step">
-                            Submit periode
+                            Submit period
                         </li>
                         <li class="step">
-                            Verifikasi admin
+                            Verify by admin
                         </li>
                     </ul>
 
                     <div class="alert alert-info">
-                        <span>Pastikan semua evidence sudah terupload.</span>
+                        <span>Ensure all evidence has been uploaded.</span>
                     </div>
 
                 </div>

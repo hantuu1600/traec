@@ -45,7 +45,7 @@ class SupportController extends Controller
     {
         $activity = (object) [
             'id' => null,
-            'type' => '', // e.g. 'Panitia', 'Organisasi'
+            'type' => '',
             'role' => '',
             'activity_date' => '',
             'description' => '',

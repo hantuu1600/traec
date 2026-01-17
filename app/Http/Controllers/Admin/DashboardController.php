@@ -8,9 +8,7 @@ class DashboardController extends Controller
 {
     public function dashboardAdminView()
     {
-        // 1. Hitung Statistik (Teaching & Research combined)
-        // Kita pakai subquery union all biar efisien, lalu group by status
-
+        //Count Statistic (Teaching & Research combined)
         $teaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
             ->select('status', \Illuminate\Support\Facades\DB::raw("'Teaching' as type"));
 
@@ -31,8 +29,7 @@ class DashboardController extends Controller
             ['label' => 'Terverifikasi', 'value' => $verifiedCount, 'icon' => 'verified'],
         ];
 
-        // 2. Ambil Recent Activities (Limit 5)
-        // Perlu join ke users table untuk ambil nama dosen
+        //take from Recent Activities
         $recentTeaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
             ->join('users', 'teaching_activities.user_id', '=', 'users.id')
             ->select([
@@ -43,7 +40,7 @@ class DashboardController extends Controller
                 'teaching_activities.created_at',
                 'teaching_activities.updated_at',
                 'users.name as lecturer',
-                'teaching_activities.semester as period', // Asumsi ada kolom semester
+                'teaching_activities.semester as period',
             ])
             ->whereNull('teaching_activities.deleted_at');
 
@@ -57,7 +54,7 @@ class DashboardController extends Controller
                 'research_activities.created_at',
                 'research_activities.updated_at',
                 'users.name as lecturer',
-                \Illuminate\Support\Facades\DB::raw("'-' as period"), // Research mungkin ga ada semester
+                \Illuminate\Support\Facades\DB::raw("'-' as period"),
             ])
             ->whereNull('research_activities.deleted_at');
 
@@ -65,16 +62,15 @@ class DashboardController extends Controller
             ->orderBy('updated_at', 'desc')
             ->paginate(10)
             ->through(function ($item) {
-                // Format data biar sesuai sama komponen x-activity-table-admin
                 return [
                     'category' => $item->category,
                     'lecturer' => $item->lecturer,
                     'title' => $item->title,
                     'period' => $item->period,
                     'date' => \Carbon\Carbon::parse($item->created_at)->format('d M Y'),
-                    'status' => ucfirst(strtolower($item->status)), // Format: Submitted, Verified, etc
+                    'status' => ucfirst(strtolower($item->status)),
                     'updated' => \Carbon\Carbon::parse($item->updated_at)->diffForHumans(),
-                    'evidence' => 0, // Belum hitung evidence, set 0 dulu
+                    'evidence' => 0,
                 ];
             });
 

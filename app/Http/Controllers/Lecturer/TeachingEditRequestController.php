@@ -38,7 +38,7 @@ class TeachingEditRequestController extends Controller
         if (!$teaching)
             abort(404);
 
-        // Log the request
+        //log request
         DB::table('activity_logs')->insert([
             'user_id' => Auth::id(),
             'action' => 'REQUEST_EDIT',

@@ -17,7 +17,7 @@
             <div class="card-body">
                 <div class="grid grid-cols-1 gap-4">
                     <div>
-                        <label class="text-xs font-bold uppercase opacity-50">Waktu</label>
+                        <label class="text-xs font-bold uppercase opacity-50">Time</label>
                         <p class="font-mono">{{ \Carbon\Carbon::parse($log->created_at)->format('d F Y, H:i:s') }}</p>
                     </div>
                     <div>

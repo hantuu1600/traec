@@ -83,7 +83,7 @@
             </span>
 
             <span class="menu-text text-md {{ $isActive('settings.*') ? 'font-semibold' : 'font-medium' }}">
-                Setting
+                Settings
             </span>
         </a>
 
@@ -101,8 +101,8 @@
                 </svg>
             </span>
 
-            <span class="menu-text text-sm {{ $isActive('admin.periods.*') ? 'font-semibold' : 'font-medium' }}">
-                Kelola Periode
+            <span class="menu-text text-md {{ $isActive('admin.periods.*') ? 'font-semibold' : 'font-medium' }}">
+                Manage Period
             </span>
         </a>
         @if(auth()->user()->role === 'super_admin')
@@ -119,7 +119,7 @@
                     </svg>
                 </span>
                 <span class="menu-text text-md {{ $isActive('superadmin.admins.*') ? 'font-semibold' : 'font-medium' }}">
-                    Kelola Admin
+                    Manage Admin
                 </span>
             </a>
         @endif

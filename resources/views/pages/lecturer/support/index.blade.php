@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-        <x-lecturer-page-header title="Kegiatan Penunjang" description="Kelola kegiatan penunjang akademik Anda." />
+        <x-lecturer-page-header title="Support Activity" description="Manage your academic support activities." />
 
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body p-0">
@@ -10,9 +10,9 @@
                     <form method="GET" class="join">
                         <input type="text" name="search" class="input input-bordered join-item w-64"
                             placeholder="Cari kegiatan..." value="{{ request('search') }}">
-                        <button class="btn btn-primary join-item">Cari</button>
+                        <button class="btn btn-primary join-item">Search</button>
                     </form>
-                    <a href="{{ route('lecturer.support.create') }}" class="btn btn-primary">+ Tambah</a>
+                    <a href="{{ route('lecturer.support.create') }}" class="btn btn-primary">+ Add Support Activity</a>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -20,11 +20,11 @@
                         <thead>
                             <tr class="bg-base-200">
                                 <th class="w-16 text-center">No</th>
-                                <th>Jenis & Peran</th>
-                                <th>Deskripsi</th>
-                                <th class="text-center">Tanggal</th>
+                                <th>Types & Roles</th>
+                                <th>Description</th>
+                                <th class="text-center">Date</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center w-24">Aksi</th>
+                                <th class="text-center w-24">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,7 +62,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center py-8 opacity-50">Belum ada data kegiatan penunjang.</td>
+                                    <td colspan="6" class="text-center py-8 opacity-50">There is no data on supporting activities yet.</td>
                                 </tr>
                             @endforelse
                         </tbody>

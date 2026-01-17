@@ -10,15 +10,11 @@ use Illuminate\Validation\Rules\Password;
 
 class ChangePasswordController extends Controller
 {
-    /**
-     * Tampilkan form ganti password.
-     * Layout menyesuaikan role user (Admin/Dosen).
-     */
     public function edit()
     {
         $user = Auth::user();
 
-        // Pilih layout berdasarkan role
+        //layout based on user role
         $layout = match ($user->role) {
             'admin' => 'layouts.dashboard-admin-layout',
             default => 'layouts.dashboard-lecturer-layout',
@@ -30,9 +26,6 @@ class ChangePasswordController extends Controller
         ]);
     }
 
-    /**
-     * Proses update password.
-     */
     public function update(Request $request)
     {
         $validated = $request->validate([

@@ -14,9 +14,9 @@
     {{-- Search --}}
     <div class="mb-4">
         <form action="{{ route('admin.lecturers.index') }}" method="GET" class="flex gap-2">
-            <input type="text" name="q" placeholder="Cari nama, NIDN, atau prodi..." value="{{ request('q') }}"
+            <input type="text" name="q" placeholder="Search by name, NIDN, or study program..." value="{{ request('q') }}"
                 class="input input-bordered w-full max-w-sm" />
-            <button type="submit" class="btn btn-ghost">Cari</button>
+            <button type="submit" class="btn">Search</button>
         </form>
     </div>
 
@@ -26,12 +26,12 @@
             <table class="table w-full">
                 <thead>
                     <tr class="bg-base-200">
-                        <th class="w-12">#</th>
+                        <th class="w-12">No</th>
                         <th>NIDN</th>
-                        <th>Nama Dosen</th>
-                        <th>Prodi</th>
+                        <th>Lecturer's Name</th>
+                        <th>Study Program</th>
                         <th>Email</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,17 +49,17 @@
                                 </a>
 
                                 <form action="{{ route('admin.lecturers.destroy', $lecturer->id) }}" method="POST"
-                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus dosen ini? Data akan disoft-delete.');">
+                                    onsubmit="return confirm('Are you sure you want to delete this lecturer? The data will be soft-deleted.');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-xs btn-outline btn-error">Hapus</button>
+                                    <button type="submit" class="btn btn-xs btn-outline btn-error">Delete</button>
                                 </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="6" class="text-center py-8 text-gray-500">
-                                Tidak ada data dosen ditemukan.
+                                No lecturer data found.
                             </td>
                         </tr>
                     @endforelse
