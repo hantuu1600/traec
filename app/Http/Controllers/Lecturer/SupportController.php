@@ -36,7 +36,7 @@ class SupportController extends Controller
         $activities = $query->paginate(10);
 
         return view('pages.lecturer.support.index', [
-            'title' => 'Penunjang Lainnya',
+            'title' => 'Other Support Activities',
             'activities' => $activities
         ]);
     }
@@ -53,7 +53,7 @@ class SupportController extends Controller
         ];
 
         return view('pages.lecturer.support.create', [
-            'title' => 'Tambah Kegiatan Penunjang',
+            'title' => 'Add Support Activities',
             'activity' => $activity
         ]);
     }
@@ -83,9 +83,9 @@ class SupportController extends Controller
                 'updated_at' => now(),
             ]);
 
-            return redirect()->route('lecturer.support.index')->with('success', 'Kegiatan penunjang berhasil ditambahkan.');
+            return redirect()->route('lecturer.support.index')->with('success', 'Support activity has been successfully added.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal menambahkan data: ' . $e->getMessage());
+            return back()->with('error', 'Failed to add data: ' . $e->getMessage());
         }
     }
 
@@ -100,7 +100,7 @@ class SupportController extends Controller
             ->get();
 
         return view('pages.lecturer.support.show', [
-            'title' => 'Detail Penunjang',
+            'title' => 'Support Activity Details',
             'activity' => $activity,
             'evidences' => $evidences
         ]);
@@ -111,11 +111,11 @@ class SupportController extends Controller
         $activity = $this->findOrFail($id);
 
         if (!in_array(strtoupper($activity->status), ['DRAFT', 'REJECTED'])) {
-            return redirect()->route('lecturer.support.index')->with('error', 'Data tidak dapat diedit.');
+            return redirect()->route('lecturer.support.index')->with('error', 'Data cannot be edited');
         }
 
         return view('pages.lecturer.support.edit', [
-            'title' => 'Edit Penunjang',
+            'title' => 'Edit Support Activities',
             'activity' => $activity
         ]);
     }
@@ -125,7 +125,7 @@ class SupportController extends Controller
         $activity = $this->findOrFail($id);
 
         if (!in_array(strtoupper($activity->status), ['DRAFT', 'REJECTED'])) {
-            return back()->with('error', 'Data tidak dapat diedit.');
+            return back()->with('error', 'Data cannot be edited.');
         }
 
         $request->validate([
@@ -144,9 +144,9 @@ class SupportController extends Controller
                 'updated_at' => now(),
             ]);
 
-            return redirect()->route('lecturer.support.index')->with('success', 'Perubahan berhasil disimpan.');
+            return redirect()->route('lecturer.support.index')->with('success', 'Changes have been successfully saved.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal menyimpan perubahan: ' . $e->getMessage());
+            return back()->with('error', 'Failed to save changes: ' . $e->getMessage());
         }
     }
 
@@ -155,7 +155,7 @@ class SupportController extends Controller
         $activity = $this->findOrFail($id);
 
         if (!in_array(strtoupper($activity->status), ['DRAFT', 'REJECTED'])) {
-            return back()->with('error', 'Tidak dapat mengunggah bukti pada status ini.');
+            return back()->with('error', 'Cannot upload evidence in current status.');
         }
 
         $request->validate([
@@ -178,7 +178,7 @@ class SupportController extends Controller
             'updated_at' => now(),
         ]);
 
-        return back()->with('success', 'Bukti berhasil diunggah.');
+        return back()->with('success', 'Evidence has been successfully uploaded.');
     }
 
     public function deleteEvidence(int $id, int $evidenceId)
@@ -186,7 +186,7 @@ class SupportController extends Controller
         $activity = $this->findOrFail($id);
 
         if (!in_array(strtoupper($activity->status), ['DRAFT', 'REJECTED'])) {
-            return back()->with('error', 'Tidak dapat menghapus bukti pada status ini.');
+            return back()->with('error', 'Cannot delete evidence in current status.');
         }
 
         $evidence = DB::table(self::EVIDENCE_TABLE)
@@ -198,10 +198,10 @@ class SupportController extends Controller
         if ($evidence) {
             Storage::disk('public')->delete($evidence->file_path);
             DB::table(self::EVIDENCE_TABLE)->where('id', $evidenceId)->delete();
-            return back()->with('success', 'Bukti berhasil dihapus.');
+            return back()->with('success', 'Evidence has been successfully deleted.');
         }
 
-        return back()->with('error', 'Bukti tidak ditemukan.');
+        return back()->with('error', 'Evidence not found.');
     }
 
     public function submit(int $id)
@@ -219,7 +219,7 @@ class SupportController extends Controller
             ->count();
 
         if ($evidenceCount == 0) {
-            return back()->with('error', 'Wajib mengunggah minimal 1 bukti.');
+            return back()->with('error', 'At least one piece of evidence must be uploaded.');
         }
 
         DB::table(self::ACTIVITY_TABLE)->where('id', $id)->update([
@@ -227,7 +227,7 @@ class SupportController extends Controller
             'updated_at' => now(),
         ]);
 
-        return back()->with('success', 'Kegiatan berhasil diajukan untuk verifikasi.');
+        return back()->with('success', 'Activity has been successfully submitted for verification.');
     }
 
     private function findOrFail($id)
@@ -239,7 +239,7 @@ class SupportController extends Controller
             ->first();
 
         if (!$activity) {
-            abort(404, 'Data tidak ditemukan.');
+            abort(404, 'Data not found.');
         }
         return $activity;
     }

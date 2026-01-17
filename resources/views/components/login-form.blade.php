@@ -46,9 +46,9 @@
                         placeholder="email@widyatama.ac.id / 041xxxx"
                         class="input input-bordered w-full @error('login_id') input-error @enderror">
 
-                    @error('login_id')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="loginIdError" class="text-sm text-error hidden mt-1">
+                        Please enter a valid email address or numeric NIDN.
+                    </p>
                 </div>
 
                 {{-- Password field --}}
@@ -60,9 +60,9 @@
                     <input type="password" name="password" id="password" placeholder="••••••••"
                         class="input input-bordered w-full @error('password') input-error @enderror">
 
-                    @error('password')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="passwordError" class="text-sm text-error hidden mt-1">
+                        Password must be at least 8 characters long.
+                    </p>
                 </div>
 
                 {{-- Remember me + Forgot password --}}

@@ -28,9 +28,9 @@
                     <input type="text" name="name" id="reg_name" value="{{ old('name') }}"
                         placeholder="Example: Budi Santoso, M.Kom" minlength="3" required
                         class="input input-bordered w-full @error('name') input-error @enderror">
-                    @error('name')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regNameError" class="text-sm text-error hidden mt-1">
+                        Name must be at least 3 characters.
+                    </p>
                 </div>
 
                 {{-- Email --}}
@@ -41,9 +41,9 @@
                     <input type="email" name="email" id="reg_email" value="{{ old('email') }}"
                         placeholder="dosen@widyatama.ac.id" required
                         class="input input-bordered w-full @error('email') input-error @enderror">
-                    @error('email')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regEmailError" class="text-sm text-error hidden mt-1">
+                        Please enter a valid email address.
+                    </p>
                 </div>
 
                 {{-- Password --}}
@@ -54,9 +54,9 @@
                     <input type="password" name="password" id="reg_password" placeholder="Minimum 8 characters"
                         minlength="8" required
                         class="input input-bordered w-full @error('password') input-error @enderror">
-                    @error('password')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regPasswordError" class="text-sm text-error hidden mt-1">
+                        Password must be at least 8 characters.
+                    </p>
                 </div>
 
                 {{-- NIDN --}}
@@ -67,9 +67,9 @@
                     <input type="text" name="nidn" id="reg_nidn" value="{{ old('nidn') }}"
                         placeholder="Example: 0412345678" pattern="[0-9]+" minlength="6" inputmode="numeric" required
                         class="input input-bordered w-full @error('nidn') input-error @enderror">
-                    @error('nidn')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regNidnError" class="text-sm text-error hidden mt-1">
+                        NIDN must contain numbers only (min 6 digits).
+                    </p>
                 </div>
 
                 {{-- Prodi --}}
@@ -84,9 +84,9 @@
                             <option value="{{ $prodi }}" {{ old('prodi') == $prodi ? 'selected' : '' }}>{{ $prodi }}</option>
                         @endforeach
                     </select>
-                    @error('prodi')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regProdiError" class="text-sm text-error hidden mt-1">
+                        Please choose a Prodi.
+                    </p>
                 </div>
 
                 {{-- Faculty --}}
@@ -102,9 +102,9 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('faculty')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regFacultyError" class="text-sm text-error hidden mt-1">
+                        Please choose a Faculty.
+                    </p>
                 </div>
 
                 {{-- Position --}}
@@ -121,9 +121,9 @@
                             </option>
                         @endforeach
                     </select>
-                    @error('position')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regPositionError" class="text-sm text-error hidden mt-1">
+                        Please choose a Position.
+                    </p>
                 </div>
 
                 {{-- Phone Number --}}
@@ -134,9 +134,9 @@
                     <input type="tel" name="phonenumber" id="reg_phone" value="{{ old('phonenumber') }}"
                         placeholder="Example: 08123456789" minlength="10" maxlength="15" required
                         class="input input-bordered w-full @error('phonenumber') input-error @enderror">
-                    @error('phonenumber')
-                        <p class="text-sm text-error mt-1">{{ $message }}</p>
-                    @enderror
+                    <p id="regPhoneError" class="text-sm text-error hidden mt-1">
+                        Phone number must be 10–15 digits (may start with +62).
+                    </p>
                 </div>
 
                 {{-- Submit --}}

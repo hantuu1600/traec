@@ -28,7 +28,7 @@
             <span class="label-text font-medium">Semester</span>
         </label>
         <input type="text" name="semester" class="input input-bordered w-full"
-            value="{{ old('semester', $teaching->semester ?? '') }}" placeholder="Example: Ganjil 2024/2025" required>
+            value="{{ old('semester', $teaching->semester ?? '') }}" placeholder="Example: 1-8" required>
     </div>
 
     {{-- Credits --}}

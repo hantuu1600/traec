@@ -17,7 +17,7 @@
             </label>
             <input type="text" name="type" class="input input-bordered w-full"
                 value="{{ old('type', $activity->type) }}" required
-                placeholder="Example: Panitia Seminar, Pengurus Organisasi Profesi">
+                placeholder="Example: Seminar Committee, Academic Organization Management">
         </div>
 
         {{-- Role --}}
@@ -26,7 +26,7 @@
                 <span class="label-text font-medium">Role / Position</span>
             </label>
             <input type="text" name="role" class="input input-bordered w-full"
-                value="{{ old('role', $activity->role) }}" required placeholder="Example: Anggota, Ketua">
+                value="{{ old('role', $activity->role) }}" required placeholder="Example: Member, Chairperson, Coordinator">
         </div>
 
         {{-- Date --}}

@@ -9,7 +9,7 @@
                 <div class="p-4 border-b border-base-200 flex justify-between items-center bg-base-100 rounded-t-box">
                     <form method="GET" class="join">
                         <input type="text" name="search" class="input input-bordered join-item w-64"
-                            placeholder="Cari kegiatan..." value="{{ request('search') }}">
+                            placeholder="Search Activity..." value="{{ request('search') }}">
                         <button class="btn btn-primary join-item">Search</button>
                     </form>
                     <a href="{{ route('lecturer.support.create') }}" class="btn btn-primary">+ Add Support Activity</a>
