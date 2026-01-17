@@ -80,33 +80,5 @@
             <input type="url" name="link" class="input input-bordered w-full"
                 value="{{ old('link', $research->link) }}">
         </div>
-
-        {{-- Members Section --}}
-        <div class="md:col-span-2 space-y-3 pt-4 border-t border-base-200">
-            <div class="flex items-center justify-between gap-3">
-                <h3 class="text-md font-semibold text-secondary">Research Members</h3>
-
-                <button type="button" id="add-member-btn" class="btn btn-sm btn-outline btn-primary">
-                    + Add Member
-                </button>
-            </div>
-
-            <div class="overflow-x-auto rounded-box border border-base-300">
-                <table class="table table-sm bg-base-100">
-                    <thead>
-                        <tr>
-                            <th class="w-32">Type</th>
-                            <th>Name</th>
-                            <th>Role</th>
-                            <th class="text-center w-20">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="members-table-body"></tbody>
-                </table>
-            </div>
-            <p class="text-sm text-base-content/60">
-                Add lecturers (Internal) or students/external parties (External).
-            </p>
-        </div>
     </div>
 </form>
