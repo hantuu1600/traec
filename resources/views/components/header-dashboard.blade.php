@@ -53,7 +53,7 @@
             </div>
 
             <ul tabindex="0"
-                class="mt-3 z-[1] p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-64 border border-base-200">
+                class="mt-3 z-1 p-2 shadow-2xl menu menu-sm dropdown-content bg-base-100 rounded-box w-64 border border-base-200">
                 @auth
                     <li class="menu-title px-4 py-2 border-b border-base-200 mb-2">
                         <span class="text-xs font-normal opacity-70 block mb-0.5">You are logged in as</span>

@@ -14,6 +14,18 @@
     </div>
 
     <div class="overflow-x-auto">
+        @if(request('q') || request('filter'))
+            <div class="mb-3 text-sm text-base-content/70">
+                Showing results for
+                @if(request('q'))
+                    "<span class="font-semibold">{{ request('q') }}</span>"
+                @endif
+
+                @if(request('filter') && request('filter') !== 'all')
+                    in <span class="font-semibold capitalize">{{ request('filter') }}</span>
+                @endif
+            </div>
+        @endif
         <table class="table">
         <thead>
             <tr class="text-base-content/70">

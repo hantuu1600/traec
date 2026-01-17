@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers\Lecturer;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    public function dashboardLecturerView()
+    public function dashboardLecturerView(Request $request)
     {
+        $keyword = $request->get('q');
+        $filter  = $request->get('filter');
+
         $userId = \Illuminate\Support\Facades\Auth::id();
 
         $teaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
@@ -37,11 +44,11 @@ class DashboardController extends Controller
         
 
         
-        $recentTeaching = \Illuminate\Support\Facades\DB::table('teaching_activities')
+        $recentTeaching = DB::table('teaching_activities')
             ->select([
                 'id',
                 'course_name as title',
-                \Illuminate\Support\Facades\DB::raw("'Teaching' as category"),
+                DB::raw("'Teaching' as category"),
                 'status',
                 'created_at',
                 'updated_at',
@@ -50,31 +57,51 @@ class DashboardController extends Controller
             ->where('user_id', $userId)
             ->whereNull('deleted_at');
 
-        $recentResearch = \Illuminate\Support\Facades\DB::table('research_activities')
+        if ($keyword) {
+            $recentTeaching->where('course_name', 'LIKE', "%{$keyword}%");
+        }
+
+        $recentResearch = DB::table('research_activities')
             ->select([
                 'id',
                 'title',
-                \Illuminate\Support\Facades\DB::raw("'Research' as category"),
+                DB::raw("'Research' as category"),
                 'status',
                 'created_at',
                 'updated_at',
-                \Illuminate\Support\Facades\DB::raw("CAST(year AS CHAR) as period"),
+                DB::raw("CAST(year AS CHAR) as period"),
             ])
             ->where('user_id', $userId)
             ->whereNull('deleted_at');
 
-        $rows = $recentTeaching->union($recentResearch)
+        if ($keyword) {
+            $recentResearch->where('title', 'LIKE', "%{$keyword}%");
+        }
+
+        if ($filter && $filter !== 'all') {
+            if ($filter === 'teaching') {
+                $recentResearch->whereRaw('1 = 0');
+            }
+
+            if ($filter === 'research') {
+                $recentTeaching->whereRaw('1 = 0');
+            }
+        }
+
+        $rows = $recentTeaching
+            ->union($recentResearch)
             ->orderBy('updated_at', 'desc')
             ->paginate(10)
+            ->withQueryString()
             ->through(function ($item) {
                 return [
                     'category' => $item->category,
-                    'lecturer' => \Illuminate\Support\Facades\Auth::user()->name,
+                    'lecturer' => Auth::user()->name,
                     'title' => $item->title,
                     'period' => $item->period,
-                    'date' => \Carbon\Carbon::parse($item->created_at)->format('d M Y'),
-                    'status' => ucfirst(strtolower($item->status)),
-                    'updated' => \Carbon\Carbon::parse($item->updated_at)->diffForHumans(),
+                    'date' => Carbon::parse($item->created_at)->format('d M Y'),
+                    'status' => strtoupper($item->status),
+                    'updated' => Carbon::parse($item->updated_at)->diffForHumans(),
                 ];
             });
 
