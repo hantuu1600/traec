@@ -81,7 +81,7 @@
 
             <span
                 class="menu-text text-sm {{ $isActive('lecturer.community-service.*') ? 'font-semibold' : 'font-medium' }}">
-                PKM
+                Community Service
             </span>
         </a>
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-        <x-lecturer-page-header title="Tambah Penunjang" description="Isi formulir kegiatan penunjang baru." />
+        <x-lecturer-page-header title="Add Support" description="Please complete the new support activity form." />
 
         <div class="card bg-base-100 border border-base-300">
             <div class="card-body p-6">
