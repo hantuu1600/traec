@@ -13,13 +13,13 @@
     {{-- HEADER --}}
     <x-header-dashboard />
 
-    <div class="flex pt-16 min-h-screen overflow-hidden">
+    <div class="flex pt-16 min-h-screen">
         {{-- SIDEBAR --}}
         <x-admin-sidebar />
 
         {{-- MAIN CONTENT --}}
-        <main class="flex-1 overflow-y-auto">
-            <section class="mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+        <main class="flex-1">
+            <section class="mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 min-h-screen">
                 @if(session('success'))
                     <div role="alert" class="alert alert-success mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"

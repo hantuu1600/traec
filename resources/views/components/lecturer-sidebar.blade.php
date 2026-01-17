@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="relative bg-base-100 border-r border-base-300 transition-all duration-300 w-64 shrink-0 flex flex-col">
+    class="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-base-100 border-r border-base-300 flex flex-col transition-all duration-300">
 
     @php
         $linkBase = 'group flex items-center gap-3 px-3 py-2.5 rounded-full transition-all duration-200';
@@ -12,7 +12,7 @@
         $isActive = fn($pattern) => request()->routeIs($pattern);
     @endphp
 
-    <nav class="flex-1 p-3 pt-6 space-y-1">
+    <nav class="flex-1 p-3 pt-6 space-y-1 overflow-auto">
 
         <a href="{{ route('lecturer.dashboard') }}"
             class="{{ $linkBase }} {{ $isActive('lecturer.dashboard') ? $active : $inactive }}"

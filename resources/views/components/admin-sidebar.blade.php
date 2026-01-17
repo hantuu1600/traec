@@ -1,5 +1,4 @@
-<aside id="sidebar" class="relative bg-base-100 border-r border-base-300 transition-all duration-300
-              w-64 flex flex-col">
+<aside id="sidebar" class="sticky top-16 h-[calc(100vh-4rem)] w-64 bg-base-100 border-r border-base-300 flex flex-col transition-all duration-300">
 
     @php
         // Base styles
@@ -15,7 +14,7 @@
         $isActive = fn($name) => request()->routeIs($name);
     @endphp
 
-    <nav class="flex-1 p-3 space-y-2 mt-5">
+    <nav class="flex-1 p-3 space-y-2 mt-5 overflow-auto">
 
         {{-- HOME --}}
         <a href="{{ route('admin.dashboard') }}"
@@ -36,7 +35,7 @@
 
         {{-- LECTURERS --}}
         <a href="{{ route('admin.lecturers.index') }}"
-            class="{{ $linkBase }} {{ $isActive('admin.lecturers') ? $active : $inactive }}">
+            class="{{ $linkBase }} {{ $isActive('admin.lecturers.index') ? $active : $inactive }}">
 
             <span class="{{ $iconBox }}">
                 <svg class="{{ $iconSvg }}" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
